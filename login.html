@@ -11,7 +11,7 @@
             font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Example background image URL */
+            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Replace with a real image URL */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -37,7 +37,7 @@
             width: 350px;
             text-align: center;
             border: 1px solid #e0e0e0;
-            backdrop-filter: blur(10px); /* Adds a glassmorphism effect to contrast the background */
+            backdrop-filter: blur(10px);
         }
 
         .login-box h2 {
@@ -62,7 +62,7 @@
         }
 
         .login-box input[type="submit"] {
-            background-color: #696969; /* Light black (dark gray) color */
+            background-color: #696969;
             color: white;
             border: none;
             padding: 15px;
@@ -75,7 +75,7 @@
         }
 
         .login-box input[type="submit"]:hover {
-            background-color: #505050; /* Darker shade of light black on hover */
+            background-color: #505050;
         }
 
         .forgot-password, .signup-link p {
@@ -96,7 +96,7 @@
         }
 
         .signup-link a {
-            color: #696969; /* Matching the button color */
+            color: #696969;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
@@ -128,14 +128,16 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
+
+            const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
-            
-            // Dummy authentication logic
+
+            // Hardcoded login credentials
             if (username === 'Rfp' && password === '123') {
-                window.location.href = 'index.html'; // Redirect to home page
+                alert('Login successful!');
+                window.location.href = 'index.html'; // Redirect to home
             } else {
-                alert('Invalid username or password');
+                alert('Invalid username or password. Please try again.');
             }
         });
     </script>
