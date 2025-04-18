@@ -113,7 +113,7 @@
     <div class="container">
         <div class="signup-box">
             <h2>Sign Up</h2>
-            <form action="dashboard.html" method="POST">
+            <form onsubmit="redirectHome(event)">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
@@ -128,5 +128,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function redirectHome(event) {
+            event.preventDefault(); // Prevent real submission
+            window.location.href = 'index.html'; // Redirect
+        }
+    </script>
 </body>
 </html>
