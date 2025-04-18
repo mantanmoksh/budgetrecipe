@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veg Recipes</title>
+    <style>
+        body {
+            font-family: Georgia, Serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: black;
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+        .scroll-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .price-range {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #555;
+        }
+        .slider-container {
+            width: 100%;
+            margin: 20px 0;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        input[type="range"] {
+            width: 80%;
+            appearance: none;
+            height: 6px;
+            background: #ddd;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid black;
+            cursor: pointer;
+        }
+        .price-value {
+            font-size: 20px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .recipe-list {
+            margin-top: 20px;
+            display: flex; /* Flexbox layout */
+            flex-wrap: wrap; /* Wrap to the next row when needed */
+            gap: 20px;
+            justify-content: center; /* Center-align items */
+            width: 100%;
+        }
+        .recipe-item {
+            flex: 1 1 calc(25% - 20px); /* Flexible layout with 4 items per row */
+            max-width: 250px; /* Limit max width for larger screens */
+            min-width: 200px; /* Minimum size to maintain responsiveness */
+            background: #f4f4f4;
+            border-radius: 5px;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .recipe-item img {
+            width: 250px; /* Fixed width */
+            height: 250px; /* Fixed height */
+            object-fit: cover; /* Ensures the image is cropped proportionally */
+            border-radius: 5px;
+        }
+        .recipe-item p {
+            margin: 10px 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Veg Recipes</h1>
+
+    <div class="scroll-container">
+        <div class="price-range">Price Range:</div>
+       
+        <div class="slider-container">
+            <span>25</span>
+            <input type="range" id="priceSlider" min="25" max="1000" value="25" step="15">
+            <span>1000</span>
+        </div>
+
+        <div class="price-value">
+            Selected Price: <span id="priceDisplay">25</span> Rupees
+        </div>
+
+        <div class="recipe-list" id="recipeList">
+            <!-- Recipes will appear here -->
+        </div>
+    </div>
+
+    <script>
+        const priceSlider = document.getElementById("priceSlider");
+        const priceDisplay = document.getElementById("priceDisplay");
+        const recipeList = document.getElementById("recipeList");
+
+        const recipes = [
+            { price: 25, name: "Besan Chilla", image: "https://i.pinimg.com/736x/93/c5/49/93c5492c509282be6b7cef80ed2e7179.jpg", link: "besanchilla.html", description: "A healthy and tasty South Indian breakfast dish made with semolina." },
+            { price: 80, name: "Aloo Paratha", image: "https://i0.wp.com/khaddoroshik.com/wp-content/uploads/2023/12/Aloo-Paratha-Recipe.webp?w=1024&ssl=1", link: "aloo_paratha.html", description: "A delicious stuffed Indian flatbread filled with spiced mashed potatoes." },
+            { price: 250, name: "Paneer Butter Masala", image: "https://i.pinimg.com/736x/d6/be/99/d6be99b3ffc8033087e466883f7459f1.jpg", link: "https://example.com/paneer_butter_masala", description: "A rich and creamy tomato-based curry with soft paneer cubes." },
+            { price: 200, name: "Veg Biryani", image: "https://i.pinimg.com/736x/95/80/7b/95807ba96c11e2387e909767c19f68ff.jpg", link: "https://example.com/veg_biryani", description: "A fragrant rice dish cooked with spices and mixed vegetables." },
+            {price:130,name:"Chickpea Spinach Curry",image:"https://i.pinimg.com/736x/d1/c1/61/d1c161fb52b8002e2a835305f5c0f8fe.jpg",link:"https://example.com/spinach",description:"Hearty, nutritious chickpea and spinach curry."},
+            {price:120,name:"Gutti Vankaya Curry",image:"https://i.pinimg.com/736x/38/e2/77/38e277f870defd6f3d7d13fb722de888.jpg",link:"https://example.com/vankayaa",description:"Stuffed brinjal curry with rich spices."},
+            { price: 250, name: "Palak Paneer", image: "https://i.pinimg.com/736x/2f/5e/ae/2f5eae6b7d5badd5dbeee57e81d28a84.jpg", link: "https://example.com/palak_paneer", description: "A North Indian curry made with pureed spinach and paneer cubes." },
+            {price:260,name:"Dal Makhani",image:"https://i.pinimg.com/736x/2a/c6/57/2ac657e8a320ac35ac5b7c67c339ea1d.jpg",link:"https://example.com/dal",description:"Creamy, buttery, rich, slow-cooked lentil curry."},
+            { price: 210, name: "Chole Bhature", image: "https://i.pinimg.com/736x/f5/9c/9a/f59c9a7f63c2cd4bd587f3de73f184a4.jpg", link: "https://example.com/chole_bhature", description: "A classic Punjabi dish of spicy chickpeas served with deep-fried bread." },
+            { price: 240, name: "Veg Pulao", image: "https://i.pinimg.com/736x/18/c5/8d/18c58d13627917fb60d39d2ce019d6a1.jpg", link: "https://example.com/stuffed_capsicum", description: "Fragrant rice with spiced vegetables." },
+             { price: 90, name: "Aloo tikki", image: "https://i.pinimg.com/736x/cf/e2/33/cfe233928aa6d63b982ddfd048cee847.jpg", link: "https://example.com/stuffed_capsicum", description: "Crispy spiced potato patties, delicious snack." },
+            { price: 300, name: "Veg Spring rolls", image: "https://i.pinimg.com/736x/29/41/a6/2941a6153669acb5a03c375fd50c54c4.jpg", link: "https://example.com/dal_makhani", description: "Crispy, stuffed, savory, fried, delicious." },
+             { price: 150, name: "Veg Grilled Sandwich", image: "https://i.pinimg.com/736x/32/e6/3a/32e63adb3a5644f3ae88b86e98187286.jpg", link: "https://example.com/dal_makhani", description: "Fresh, crunchy, cheesy, healthy, delicious sandwich. " },
+             { price: 150, name: "Veg Kofta Curry",  image: "https://i.pinimg.com/736x/77/6b/6d/776b6d49ec2ddc58033db5786ee135f2.jpg", link: "https://example.com/dal_makhani", description: "Spiced vegetable balls in rich gravy." },
+            { price: 150, name: "White Sause Pasta",   image: "https://i.pinimg.com/736x/e8/68/c8/e868c8f4d0928bcb470fcf4e69c212cc.jpg", link: "https://example.com/dal_makhani", description: "Creamy, cheesy, garlic-flavored pasta delight." },
+             { price: 55, name: "Aloo Fry Curry",  image: "https://i.pinimg.com/736x/80/e2/01/80e2014e953fc0de1c980a05982250fc.jpg", link: "https://example.com/mushroom_tikka", description: "Spiced, flavorful, potato-based Indian curry." },
+             {price:70,name:"Bendi Fry",image:"https://i.pinimg.com/736x/52/d3/7b/52d37bd575f08565db4e97c8c2ade53d.jpg",link:"https://example.com/bendi_fry", description:"Crispy, spiced, stir-fried okra delight."},
+             {price:160,name:"Veg Noodles",image:"https://i.pinimg.com/736x/ae/a4/36/aea4369b1d071a4382b4b909669c6814.jpg",link:"https://example.com/noodle",description:"Spicy, stir-fried, flavorful veggie noodles."},
+            {price:100,name:"Dhokla",image:"https://i.pinimg.com/736x/3e/e6/60/3ee660d8ddfa8dc26b1e975f93c60648.jpg",link:"https://example.com/dhokla",description:"Soft, spongy, steamed savory gram flour cake."},
+            {price:90,name:"Roasted Tomato Soup",image:"https://i.pinimg.com/736x/24/a1/1f/24a11f30828b7f9a847b4472631dd516.jpg",link:"https://example.com/soup",description:"Smoky, tangy, creamy, comforting tomato soup."},
+            {price:95,name:"Samosa",image:"https://i.pinimg.com/736x/e7/ad/34/e7ad343c1060bad6359f1eab5ce42bb5.jpg",link:"https//example.com/sam",description:"Crispy, spicy, stuffed, deep-fried snack."},
+            {price:170,name:",Paav Bhaji",image:"https://i.pinimg.com/736x/25/36/6b/25366b1b91e9f5dabec8fe8ab94ffa2f.jpg",link:"https//example.com/paav",description:"Spicy mashed vegetables with buttered pav."},
+            {price:110,name:"Papdi Chat",image:"https://i.pinimg.com/736x/f0/dc/32/f0dc328ace44cb0bf91b1a65154ffc1d.jpg",link:"https//example.com/papdi",description:"Crispy, tangy, spicy, sweet, flavorful delight."},
+            {price:160,name:"Dahi Puri",image:"https://i.pinimg.com/736x/36/aa/e4/36aae45029cc0f6cdb08fdc12a9fe85c.jpg",link:"https//example.com/dahi",description:"Crispy, tangy, spicy, sweet, yogurt-filled delight."},
+            { price: 450, name: "Panner Tikka Masala", image: "https://i.pinimg.com/736x/49/e5/80/49e5800ada1c3a59021e2c84bf91c457.jpg", link: "https://example.com/mushroom_tikka", description: "Spiced grilled paneer in creamy gravy." }
+        ];
+
+        function updateRecipes(price) {
+            recipeList.innerHTML = "";
+            const filteredRecipes = recipes.filter(recipe => recipe.price <= price);
+            filteredRecipes.forEach(recipe => {
+                const recipeItem = document.createElement("div");
+                recipeItem.classList.add("recipe-item");
+               
+                const recipeLink = document.createElement("a");
+                recipeLink.href = recipe.link;
+                recipeLink.target = "_blank";
+               
+                const recipeImage = document.createElement("img");
+                recipeImage.src = recipe.image;
+                recipeImage.alt = recipe.name;
+               
+                const recipeText = document.createElement("div");
+                recipeText.textContent = recipe.name;
+               
+                const recipeDescription = document.createElement("p");
+                recipeDescription.textContent = recipe.description;
+               
+                recipeLink.appendChild(recipeImage);
+                recipeItem.appendChild(recipeLink);
+                recipeItem.appendChild(recipeText);
+                recipeItem.appendChild(recipeDescription);
+               
+                recipeList.appendChild(recipeItem);
+            });
+        }
+
+        priceSlider.addEventListener("input", function() {
+            const selectedPrice = priceSlider.value;
+            priceDisplay.textContent = selectedPrice;
+            updateRecipes(selectedPrice);
+        });
+
+        updateRecipes(priceSlider.value);
+    </script>
+</body>
+</html>
