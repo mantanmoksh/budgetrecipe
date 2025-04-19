@@ -4,7 +4,7 @@
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chicken Biryani Recipe | Budget Friendly Recipe Finder</title>
+    <title>Coconut Burfi Recipe | Budget Friendly Recipe Finder</title>
 
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -260,13 +260,42 @@
         min-width: 120px;
         text-align: center;
     }
+    /* Why You'll Love This Dish */
+    .why-love {
+        margin-top: 30px;
+    }
+    .why-love h3 {
+        font-size: 1.8rem;
+        color: #000000;
+        margin-bottom: 15px;
+    }
+    .why-love ul {
+        list-style-type: none;
+    }
+    .why-love li {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        padding-left: 30px;
+        position: relative;
+    }
+    .why-love li:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
     /* Footer */
     footer {
         background-color: #000000;
         color: #ffffff;
-        text-align:center;
+        text-align: center;
+        padding: 20px 0;
         font-size: 1.1rem;
-    
+        margin-top: 50px;
     }
     footer p {
         margin-bottom: 10px;
@@ -306,8 +335,8 @@
 
     <!-- Recipe Title -->
     <div class="recipe-title">
-        <h2>Chicken Biryani</h2>
-        <p>Fragrant rice with juicy chicken in a rich blend of spices</p>
+        <h2>Coconut Burfi</h2>
+        <p>A delicious and easy-to-make Indian sweet made with fresh coconut and sugar.</p>
     </div>
 
     <!-- Main Content -->
@@ -318,22 +347,20 @@
 
             <!-- Image Gallery -->
             <div class="image-gallery">
-                <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/06/chicken-biryani-recipe-1-500x500.jpg" alt="Chicken Biryani">
-                <img src="https://i.pinimg.com/736x/5d/28/10/5d2810d3862208703ab9d9a51935aebd.jpg" alt="Chicken Biryani Cooking">
+                <img src="https://sinfullyspicy.com/wp-content/uploads/2012/11/img_0584.jpg" alt="Coconut Burfi">
+                <img src="https://sinfullyspicy.com/wp-content/uploads/2012/11/img_0520.jpg" alt="Coconut Burfi">
             </div>
 
             <!-- Nutritional Info -->
             <div class="nutrition">
-                <h3>Nutritional Information (Per Serving)</h3>
+                <h3>Nutritional Information (Per Piece)</h3>
                 <ul>
-                    <li><strong>Calories:</strong> 350 kcal</li>
-                    <li><strong>Protein:</strong> 22g</li>
-                    <li><strong>Carbs:</strong> 45g</li>
-                    <li><strong>Fat:</strong> 10g</li>
-                    <li><strong>Fiber:</strong> 3g</li>
-                    <li><strong>Iron:</strong> 2.5mg</li>
-                    <li><strong>Calcium:</strong> 45mg</li>
-                    <li><strong>Vitamin C:</strong> 10mg</li>
+                    <li><strong>Calories:</strong> 120 kcal</li>
+                    <li><strong>Protein:</strong> 1g</li>
+                    <li><strong>Carbs:</strong> 15g</li>
+                    <li><strong>Fat:</strong> 7g</li>
+                    <li><strong>Fiber:</strong> 2g</li>
+                    <li><strong>Sugar:</strong> 12g</li>
                 </ul>
             </div>
 
@@ -341,11 +368,10 @@
             <div class="why-love">
                 <h3>Why You'll Love This Dish</h3>
                 <ul>
-                    <li>🌟 <strong>Flavorful:</strong> Spiced perfectly with a rich blend of ingredients.</li>
-                    <li>🌿 <strong>Healthy:</strong> Packed with protein and a good balance of carbs.</li>
-                    <li>💰 <strong>Budget-Friendly:</strong> Costs ₹100-₹150 per serving.</li>
-                    <li>🍽️ <strong>Perfect for Parties:</strong> Great for serving large groups!</li>
-                    <li>✅ <strong>One-pot Meal:</strong> Easy to prepare with minimal cleanup.</li>
+                    <li>🥥 <strong>Rich Flavor:</strong> Perfect balance of coconut and sweetness.</li>
+                    <li>⏱️ <strong>Quick to Make:</strong> Ready in under 30 minutes.</li>
+                    <li>💰 <strong>Budget-Friendly:</strong> Made with simple, affordable ingredients.</li>
+                    <li>🎉 <strong>Festive Favorite:</strong> Perfect for celebrations and festivals.</li>
                 </ul>
             </div>
 
@@ -361,7 +387,7 @@
                 <!-- Serving Size Adjuster -->
                 <div class="serving-size">
                     <label for="servings">Servings:</label>
-                    <input type="number" id="servings" value="1" min="1" max="10">
+                    <input type="number" id="servings" value="12" min="1" max="24">
                 </div>
 
                 <!-- Ingredients -->
@@ -370,68 +396,65 @@
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient1">
-                            <label for="ingredient1">2 cups basmati rice</label>
+                            <label for="ingredient1">2 cups fresh grated coconut</label>
                         </div>
                         <span class="ingredient-cost">₹40</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient2">
-                            <label for="ingredient2">500g chicken (boneless or bone-in)</label>
+                            <label for="ingredient2">1 cup sugar</label>
                         </div>
-                        <span class="ingredient-cost">₹100</span>
+                        <span class="ingredient-cost">₹20</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient3">
-                            <label for="ingredient3">1 onion, sliced</label>
+                            <label for="ingredient3">1/2 cup milk</label>
                         </div>
                         <span class="ingredient-cost">₹10</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient4">
-                            <label for="ingredient4">Spices (bay leaf, cinnamon, cardamom, cloves, cumin)</label>
+                            <label for="ingredient4">2 tablespoons ghee</label>
                         </div>
                         <span class="ingredient-cost">₹15</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient5">
-                            <label for="ingredient5">1 tsp chili powder</label>
+                            <label for="ingredient5">1/2 teaspoon cardamom powder</label>
                         </div>
                         <span class="ingredient-cost">₹5</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient6">
-                            <label for="ingredient6">Salt to taste</label>
+                            <label for="ingredient6">10-12 cashews (optional)</label>
                         </div>
-                        <span class="ingredient-cost">₹5</span>
+                        <span class="ingredient-cost">₹10</span>
                     </div>
-                    <div class="total-cost">Total: ₹175</div>
+                    <div class="total-cost">Total: ₹100</div>
                 </div>
 
                 <!-- Instructions -->
                 <div class="instructions">
                     <h3>Instructions</h3>
                     <div class="instruction-step active" data-step="1">
-                        Rinse the basmati rice well and soak for 30 minutes.
+                        Grease a plate or tray with ghee and keep it ready.
                     </div>
                     <div class="instruction-step" data-step="2">
-                        In a large pot, heat oil and sauté onions until golden brown. Remove half for garnish.
+                        Heat a pan and add grated coconut. Dry roast for 2-3 minutes on low flame.
                     </div>
                     <div class="instruction-step" data-step="3">
-                        Add the chicken pieces and cook until they are lightly browned.
+                        Add sugar and milk to the pan. Mix well and cook on medium flame.
                     </div>
                     <div class="instruction-step" data-step="4">
-                        Add spices, chili powder, salt, and cook for 10 minutes. Add water and bring to a boil.
+                        Keep stirring continuously until the mixture thickens and starts leaving the sides of the pan (about 10-12 minutes).
                     </div>
                     <div class="instruction-step" data-step="5">
-                        Add the soaked rice, cover, and cook on low heat until the rice is fully cooked (about 20 minutes).
-                    </div>
-                    <div class="instruction-step" data-step="6">
-                        Garnish with fried onions and serve hot with raita or salad.
+                        Add ghee and cardamom powder. Mix well and pour onto the greased plate. Garnish with cashews if using. Let it cool for 30 minutes before cutting into squares.
                     </div>
 
                     <!-- Step Navigation -->
@@ -468,25 +491,18 @@
     const servingsInput = document.getElementById('servings');
     servingsInput.addEventListener('input', (e) => {
         const servings = e.target.value;
-        const cost = servings * 175;  // base cost for 1 serving
+        const cost = Math.round(servings * 8.33);  // base cost for 12 pieces is ₹100
         document.querySelector('.total-cost').textContent = `Total: ₹${cost}`;
     });
 
-    // Step navigation
+    // Step navigation functionality
+    const steps = document.querySelectorAll('.instruction-step');
     const prevBtn = document.getElementById('prev-step');
     const nextBtn = document.getElementById('next-step');
-    const steps = document.querySelectorAll('.instruction-step');
     let currentStep = 0;
 
-    prevBtn.addEventListener('click', () => {
-        if (currentStep > 0) {
-            steps[currentStep].classList.remove('active');
-            currentStep--;
-            steps[currentStep].classList.add('active');
-            prevBtn.disabled = currentStep === 0;
-            nextBtn.disabled = currentStep === steps.length - 1;
-        }
-    });
+    prevBtn.disabled = currentStep === 0;
+    nextBtn.disabled = currentStep === steps.length - 1;
 
     nextBtn.addEventListener('click', () => {
         if (currentStep < steps.length - 1) {
@@ -497,10 +513,16 @@
             nextBtn.disabled = currentStep === steps.length - 1;
         }
     });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentStep > 0) {
+            steps[currentStep].classList.remove('active');
+            currentStep--;
+            steps[currentStep].classList.add('active');
+            prevBtn.disabled = currentStep === 0;
+            nextBtn.disabled = currentStep === steps.length - 1;
+        }
+    });
     </script>
-
-</div>
-
 </body>
 </html>
-
