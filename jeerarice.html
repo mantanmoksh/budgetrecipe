@@ -4,308 +4,290 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeera Rice Recipe | Budget Friendly Recipe Finder</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
     <style>
-    /* Basic Reset */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #ffffff;
-        color: #000000;
-        line-height: 1.6;
-    }
-    /* Header */
-    header {
-        background: #000000;
-        color: #ffffff;
-        padding: 20px 0;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-    header h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-    }
-    /* Container */
-    .container {
-        width: 85%;
-        margin: 0 auto;
-        padding: 20px 0;
-    }
-    /* Recipe Title */
-    .recipe-title {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .recipe-title h2 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3rem;
-        color: #000000;
-        margin-bottom: 10px;
-    }
-    .recipe-title p {
-        font-size: 1.2rem;
-        color: #333333;
-    }
-    /* Main Content */
-    main {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 40px;
-        justify-content: space-between;
-    }
-    /* Left Column */
-    .left-column {
-        flex: 1;
-        min-width: 300px;
-    }
-    /* Right Column */
-    .right-column {
-        flex: 1;
-        min-width: 300px;
-        position: relative;
-    }
-    /* Image Gallery */
-    .image-gallery {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    .image-gallery img {
-        width: 100%;
-        border-radius: 15px;
-        object-fit: cover;
-        height: auto;
-        max-height: 400px;
-        transition: transform 0.3s ease, filter 0.3s ease;
-    }
-    .image-gallery img:hover {
-        transform: scale(1.05);
-        filter: brightness(0.9);
-    }
-    /* Interactive Elements */
-    .interactive-section {
-        background: #f9f9f9;
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px solid #dddddd;
-    }
-    /* Serving Size Adjuster */
-    .serving-size {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .serving-size label {
-        font-weight: bold;
-        margin-right: 10px;
-        font-size: 1.1rem;
-    }
-    .serving-size input {
-        width: 60px;
-        padding: 5px;
-        font-size: 1rem;
-        text-align: center;
-        border: 1px solid #000000;
-        border-radius: 5px;
-        margin-right: 5px;
-    }
-    /* Add to Favorites Button */
-    .favorites-btn {
-        background: #000000;
-        color: #ffffff;
-        border: none;
-        padding: 10px 20px;
-        font-size: 1.1rem;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: auto;
-        display: block;
-        margin-bottom: 20px;
-    }
-    .favorites-btn.active {
-        background: #ff0000;
-    }
-    /* Ingredient Checklist */
-    .ingredients {
-        margin-bottom: 30px;
-    }
-    .ingredients h3 {
-        font-size: 1.8rem;
-        color: #000000;
-        margin-bottom: 15px;
-    }
-    .ingredient-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    .ingredient-details {
-        display: flex;
-        align-items: center;
-    }
-    .ingredient-item input[type="checkbox"] {
-        margin-right: 10px;
-        width: 20px;
-        height: 20px;
-    }
-    .ingredient-item label {
-        font-size: 1.1rem;
-        cursor: pointer;
-    }
-    .ingredient-cost {
-        font-size: 1.1rem;
-        color: #555555;
-    }
-    /* Total Cost */
-    .total-cost {
-        font-size: 1.5rem;
-        font-weight: bold;
-        text-align: right;
-        margin-top: 10px;
-        color: #000000;
-    }
-    /* Instructions */
-    .instructions {
-        margin-top: 30px;
-    }
-    .instructions h3 {
-        font-size: 1.8rem;
-        color: #000000;
-        margin-bottom: 15px;
-    }
-    .instruction-step {
-        display: none;
-        background: #f0f0f0;
-        padding: 20px;
-        border-radius: 10px;
-        position: relative;
-        font-size: 1.1rem;
-        min-height: 150px;
-    }
-    .instruction-step.active {
-        display: block;
-    }
-    .instruction-step::before {
-        content: attr(data-step);
-        position: absolute;
-        left: -40px;
-        top: 20px;
-        background: #000000;
-        color: white;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 1rem;
-    }
-    /* Step Navigation */
-    .step-navigation {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-    .step-navigation button {
-        background: #000000;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 1.1rem;
-        border-radius: 5px;
-        cursor: pointer;
-        flex: 1;
-        margin: 0 5px;
-    }
-    .step-navigation button:disabled {
-        background: #cccccc;
-        cursor: not-allowed;
-    }
-    /* Nutritional Info */
-    .nutrition {
-        margin-top: 30px;
-    }
-    .nutrition h3 {
-        font-size: 1.8rem;
-        color: #000000;
-        margin-bottom: 15px;
-    }
-    .nutrition ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    .nutrition li {
-        background: #f0f0f0;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-size: 1rem;
-        flex: 1;
-        min-width: 120px;
-        text-align: center;
-    }
-    /* Why Love Section */
-    .why-love {
-        margin-top: 30px;
-    }
-    .why-love h3 {
-        font-size: 1.8rem;
-        color: #000000;
-        margin-bottom: 15px;
-    }
-    .why-love ul {
-        list-style-type: none;
-    }
-    .why-love li {
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-    }
-    /* Footer */
-    footer {
-        background-color: #000000;
-        color: #ffffff;
-        text-align: center;
-        padding: 20px 0;
-        font-size: 1.1rem;
-        margin-top: 50px;
-    }
-    footer p {
-        margin-bottom: 10px;
-    }
-    .social-icons a {
-        color: #ffffff;
-        margin: 0 10px;
-        font-size: 1.5rem;
-        text-decoration: none;
-    }
-    .social-icons a:hover {
-        color: #999999;
-    }
-    /* Media Queries */
-    @media (max-width: 768px) {
-        main {
-            flex-direction: column;
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .step-navigation button {
-            margin: 10px 0;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+        }
+        /* Header */
+        header {
+            background: #000000;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        /* Container */
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        /* Recipe Title */
+        .recipe-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .recipe-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        .recipe-title p {
+            font-size: 1.2rem;
+            color: #333333;
+        }
+        /* Main Content */
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+        /* Left Column */
+        .left-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        /* Right Column */
+        .right-column {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        /* Image Gallery */
+        .image-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+            height: auto;
+            max-height: 400px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+            filter: brightness(0.9);
+        }
+        /* Interactive Elements */
+        .interactive-section {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #dddddd;
+        }
+        /* Serving Size Adjuster */
+        .serving-size {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .serving-size label {
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        .serving-size input {
+            width: 60px;
+            padding: 5px;
+            font-size: 1rem;
+            text-align: center;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        /* Add to Favorites Button */
+        .favorites-btn {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .favorites-btn.active {
+            background: #ff0000;
+        }
+        /* Ingredient Checklist */
+        .ingredients {
+            margin-bottom: 30px;
+        }
+        .ingredients h3 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        .ingredient-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .ingredient-details {
+            display: flex;
+            align-items: center;
+        }
+        .ingredient-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        .ingredient-item label {
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .ingredient-cost {
+            font-size: 1.1rem;
+            color: #555555;
+        }
+        /* Total Cost */
+        .total-cost {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+            color: #000000;
+        }
+        /* Instructions */
+        .instructions {
+            margin-top: 30px;
+        }
+        .instructions h3 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        .instruction-step {
+            display: none;
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            font-size: 1.1rem;
+            min-height: 180px;
+        }
+        .instruction-step.active {
+            display: block;
         }
         .instruction-step::before {
-            left: -35px;
+            content: attr(data-step);
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            background: #000000;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
         }
-    }
+        /* Step Navigation */
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .step-navigation button {
+            background: #000000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+            margin: 0 5px;
+        }
+        .step-navigation button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        /* Nutritional Info */
+        .nutrition {
+            margin-top: 30px;
+        }
+        .nutrition h3 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        .nutrition ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .nutrition li {
+            background: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.1rem;
+            margin-top: 50px;
+        }
+        footer p {
+            margin-bottom: 10px;
+        }
+        .social-icons a {
+            color: #ffffff;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #999999;
+        }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            .step-navigation button {
+                margin: 10px 0;
+            }
+            .instruction-step::before {
+                left: -35px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -318,7 +300,7 @@
 
         <div class="recipe-title">
             <h2>Jeera Rice</h2>
-            <p>A simple and aromatic Indian rice dish flavored with cumin seeds.</p>
+            <p>Simple and flavorful rice dish seasoned with cumin seeds.</p>
         </div>
 
         <main>
@@ -326,7 +308,7 @@
             <div class="left-column">
 
                 <div class="image-gallery">
-                    <img src="https://i.pinimg.com/736x/ad/fd/cf/adfdcf7d1edb8ae989c3b1eba688892c.jpg" alt="Jeera Rice">
+                    <img src="https://www.jcookingodyssey.com/wp-content/uploads/2023/06/jeera-rice-3.jpg" alt="Jeera Rice">
                 </div>
 
                 <div class="nutrition">
@@ -337,17 +319,16 @@
                         <li><strong>Carbs:</strong> 45g</li>
                         <li><strong>Fat:</strong> 2g</li>
                         <li><strong>Fiber:</strong> 2g</li>
-                        <li><strong>Iron:</strong> 1mg</li>
                     </ul>
                 </div>
 
                 <div class="why-love">
                     <h3>Why You'll Love This Dish</h3>
                     <ul>
-                        <li>🍚 <strong>Simple & Quick:</strong> Ready in under 20 minutes.</li>
-                        <li>🌿 <strong>Aromatic:</strong> The cumin seeds infuse a lovely fragrance.</li>
-                        <li>💰 <strong>Budget-Friendly:</strong> Made with basic pantry staples.</li>
-                        <li>🍛 <strong>Versatile:</strong> Pairs well with almost any Indian curry or lentil dish.</li>
+                        <li><strong>Quick & Easy:</strong> Ready in minutes.</li>
+                        <li><strong>Flavorful:</strong> Simple yet aromatic.</li>
+                        <li><strong>Versatile:</strong> Great side dish for any Indian meal.</li>
+                        <li><strong>Budget-Friendly:</strong> Uses minimal ingredients.</li>
                     </ul>
                 </div>
 
@@ -364,70 +345,70 @@
                     </div>
 
                     <div class="ingredients">
-                        <h3>Ingredients (For 1 Serving)</h3>
+                        <h3>Ingredients</h3>
                         <div class="ingredient-item">
                             <div class="ingredient-details">
-                                <input type="checkbox" id="jeera-rice-ingredient1">
-                                <label for="jeera-rice-ingredient1">1/2 cup basmati rice</label>
+                                <input type="checkbox" id="ingredient1">
+                                <label for="ingredient1">1 cup basmati rice</label>
                             </div>
-                            <span class="ingredient-cost">₹20</span>
+                            <span class="ingredient-cost">₹10</span>
                         </div>
                         <div class="ingredient-item">
                             <div class="ingredient-details">
-                                <input type="checkbox" id="jeera-rice-ingredient2">
-                                <label for="jeera-rice-ingredient2">1 teaspoon cumin seeds (jeera)</label>
-                            </div>
-                            <span class="ingredient-cost">₹1</span>
-                        </div>
-                        <div class="ingredient-item">
-                            <div class="ingredient-details">
-                                <input type="checkbox" id="jeera-rice-ingredient3">
-                                <label for="jeera-rice-ingredient3">1 tablespoon oil or ghee</label>
-                            </div>
-                            <span class="ingredient-cost">₹2</span>
-                        </div>
-                        <div class="ingredient-item">
-                            <div class="ingredient-details">
-                                <input type="checkbox" id="jeera-rice-ingredient4">
-                                <label for="jeera-rice-ingredient4">1 cup water</label>
+                                <input type="checkbox" id="ingredient2">
+                                <label for="ingredient2">2 cups water</label>
                             </div>
                             <span class="ingredient-cost">₹0</span>
                         </div>
                         <div class="ingredient-item">
                             <div class="ingredient-details">
-                                <input type="checkbox" id="jeera-rice-ingredient5">
-                                <label for="jeera-rice-ingredient5">Salt to taste</label>
+                                <input type="checkbox" id="ingredient3">
+                                <label for="ingredient3">1 tbsp ghee or oil</label>
+                            </div>
+                            <span class="ingredient-cost">₹3</span>
+                        </div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-details">
+                                <input type="checkbox" id="ingredient4">
+                                <label for="ingredient4">1 tsp cumin seeds</label>
                             </div>
                             <span class="ingredient-cost">₹1</span>
                         </div>
-                        <div class="total-cost">Total: ₹24</div>
+                        <div class="ingredient-item">
+                            <div class="ingredient-details">
+                                <input type="checkbox" id="ingredient5">
+                                <label for="ingredient5">Salt to taste</label>
+                            </div>
+                            <span class="ingredient-cost">₹1</span>
+                        </div>
+                        <div class="total-cost">Total: ₹15</div>
                     </div>
 
                     <div class="instructions">
                         <h3>Instructions</h3>
                         <div class="instruction-step active" data-step="1">
-                            Wash the basmati rice thoroughly under running water until the water runs clear. Soak the rice in water for at least 15-20 minutes. Drain well.
+                            Rinse the basmati rice thoroughly under cold water until the water runs clear. This helps remove excess starch.
                         </div>
                         <div class="instruction-step" data-step="2">
-                            Heat oil or ghee in a heavy-bottomed pot or pan over medium heat.
+                            Heat ghee or oil in a heavy-bottomed pot over medium heat.
                         </div>
                         <div class="instruction-step" data-step="3">
-                            Add cumin seeds to the hot oil or ghee. Let them splutter for a few seconds until they turn light brown and release their aroma. Be careful not to burn them.
+                            Add cumin seeds to the hot ghee/oil. Let them splutter for a few seconds.
                         </div>
                         <div class="instruction-step" data-step="4">
-                            Add the drained rice to the pot and sauté for a minute, stirring gently to coat the grains with the oil/ghee and cumin.
+                            Add the rinsed rice to the pot and sauté for a minute, stirring gently.
                         </div>
                         <div class="instruction-step" data-step="5">
-                            Pour in the water and add salt to taste. Bring the water to a boil.
+                            Pour in 2 cups of water and add salt to taste. Bring the water to a boil.
                         </div>
                         <div class="instruction-step" data-step="6">
-                            Once the water is boiling, reduce the heat to low, cover the pot tightly with a lid, and let it simmer for 12-15 minutes, or until all the water is absorbed and the rice is cooked through. Avoid lifting the lid during this time to allow the steam to cook the rice properly.
+                            Once boiling, reduce the heat to low, cover the pot tightly with a lid, and let it simmer for 15-20 minutes, or until all the water is absorbed and the rice is cooked.
                         </div>
                         <div class="instruction-step" data-step="7">
-                            Once cooked, turn off the heat and let the rice rest, covered, for 5 minutes. This allows the steam to settle and the grains to become fluffy.
+                            Remove the pot from the heat and let it rest, covered, for 5 minutes. This allows the steam to finish cooking the rice.
                         </div>
                         <div class="instruction-step" data-step="8">
-                            Gently fluff the jeera rice with a fork before serving. Garnish with fresh coriander leaves (optional). Serve hot as a side dish with your favorite Indian curries or dals.
+                            Gently fluff the rice with a fork before serving.
                         </div>
 
                         <div class="step-navigation">
@@ -438,6 +419,7 @@
 
                 </div>
             </div>
+
         </main>
 
         <footer>
@@ -450,62 +432,47 @@
         </footer>
 
         <script>
-        const favoritesBtn = document.getElementById('favorites-btn');
-        favoritesBtn.addEventListener('click', () => {
-            favoritesBtn.classList.toggle('active');
-            favoritesBtn.textContent = favoritesBtn.classList.contains('active') ? 'Added to Favorites' : 'Add to Favorites';
-        });
+            const favoritesBtn = document.getElementById('favorites-btn');
+            favoritesBtn.addEventListener('click', () => {
+                favoritesBtn.classList.toggle('active');
+                favoritesBtn.textContent = favoritesBtn.classList.contains('active') ? 'Added to Favorites' : 'Add to Favorites';
+            });
 
-        const servingsInput = document.getElementById('servings');
-        const initialServings = parseInt(servingsInput.value);
-        const riceCostPerHalfCup = 20;
-        const cuminCostPerTeaspoon = 1;
-        const oilCostPerTablespoon = 2;
-        const saltCostToTaste = 1;
+            const servingsInput = document.getElementById('servings');
+            servingsInput.addEventListener('input', (e) => {
+                const servings = parseInt(e.target.value);
+                const baseCost = 15; // Base cost for 1 serving
+                const cost = servings * baseCost;
+                document.querySelector('.total-cost').textContent = `Total: ₹${cost.toFixed(0)}`;
+            });
 
-        function updateCost() {
-            const servings = parseInt(servingsInput.value);
-            const riceCost = (riceCostPerHalfCup / 0.5) * (0.5 * servings);
-            const cuminCost = cuminCostPerTeaspoon * servings;
-            const oilCost = oilCostPerTablespoon * servings;
-            const saltCost = saltCostToTaste * servings;
-            const totalCost = riceCost + cuminCost + oilCost + saltCost;
-            document.querySelector('.total-cost').textContent = `Total: ₹${totalCost.toFixed(0)}`;
+            const steps = document.querySelectorAll('.instruction-step');
+            const prevBtn = document.getElementById('prev-step');
+            const nextBtn = document.getElementById('next-step');
+            let currentStep = 0;
 
-            const riceLabel = document.querySelector('label[for="jeera-rice-ingredient1"]');
-            riceLabel.textContent = `${0.5 * servings} cup basmati rice`;
-        }
+            prevBtn.disabled = currentStep === 0;
+            nextBtn.disabled = currentStep === steps.length - 1;
 
-        servingsInput.addEventListener('input', updateCost);
-        updateCost();
+            nextBtn.addEventListener('click', () => {
+                if (currentStep < steps.length - 1) {
+                    steps[currentStep].classList.remove('active');
+                    currentStep++;
+                    steps[currentStep].classList.add('active');
+                    prevBtn.disabled = currentStep === 0;nextBtn.disabled = currentStep === steps.length - 1;
+                }
+            });
 
-        const steps = document.querySelectorAll('.instruction-step');
-        const prevBtn = document.getElementById('prev-step');
-        const nextBtn = document.getElementById('next-step');
-        let currentStep = 0;
-
-        prevBtn.disabled = currentStep === 0;
-        nextBtn.disabled = currentStep === steps.length - 1;
-
-        nextBtn.addEventListener('click', () => {
-            if (currentStep < steps.length - 1) {
-                steps[currentStep].classList.remove('active');
-                currentStep++;
-                steps[currentStep].classList.add('active');
-                prevBtn.disabled = currentStep === 0;
-                nextBtn.disabled = currentStep === steps.length - 1;
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentStep > 0) {
-                steps[currentStep].classList.remove('active');
-                currentStep--;
-                steps[currentStep].classList.add('active');
-                prevBtn.disabled = currentStep === 0;
-                nextBtn.disabled = currentStep === steps.length - 1;
-            }
-        });
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    steps[currentStep].classList.remove('active');
+                    currentStep--;
+                    steps[currentStep].classList.add('active');
+                    prevBtn.disabled = currentStep === 0;
+                    nextBtn.disabled = currentStep === steps.length - 1;
+                }
+            });
         </script>
-    </body>
-    </html>
+
+</body>
+</html>

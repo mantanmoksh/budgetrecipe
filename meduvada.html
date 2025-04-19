@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fried Ice Cream Recipe | Budget Friendly Recipe Finder</title>
+    <title>Medu Vada Recipe | Budget Friendly Recipe Finder</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
+        /* (Same CSS styles as previous recipes - maintained for consistency) */
         /* Basic Reset */
         * {
             margin: 0;
@@ -257,6 +258,67 @@
             min-width: 120px;
             text-align: center;
         }
+        /* Why You'll Love This Dish */
+        .why-love {
+            margin-top: 30px;
+        }
+        .why-love h3 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        .why-love ul {
+            list-style-type: none;
+        }
+        .why-love li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+        .why-love li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        /* Variations */
+        .variations {
+            margin-top: 30px;
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #fb8c00;
+        }
+        .variations h4 {
+            font-size: 1.3rem;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        .variations ul {
+            margin-left: 20px;
+        }
+        /* Occasion Icons */
+        .occasions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .occasion-item {
+            text-align: center;
+            margin: 10px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .occasion-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
         /* Footer */
         footer {
             background-color: #000000;
@@ -301,8 +363,8 @@
 <div class="container">
 
     <div class="recipe-title">
-        <h2>Fried Ice Cream</h2>
-        <p>A surprisingly delightful dessert with a warm, crispy shell and a cold, creamy center.</p>
+        <h2>Crispy & Savory Medu Vada</h2>
+        <p>A popular South Indian fritter made from urad dal</p>
     </div>
 
     <main>
@@ -310,33 +372,61 @@
         <div class="left-column">
 
             <div class="image-gallery">
-                <img src="https://www.cookingclassy.com/wp-content/uploads/2013/01/fried-ice-cream-1-768x1152.jpg" alt="Fried Ice Cream">
-                <img src="https://i.pinimg.com/736x/21/0b/48/210b48d82028b9e5197fad7eb5c7bcc5.jpg" alt="Fried Ice Cream Preparation">
+              
+                <img src="https://i.pinimg.com/736x/57/db/de/57dbde553222271fcf1175bd82c91195.jpg" alt="Close-up of Medu Vada">
+            </div>
+
+            <div class="occasions">
+                <div class="occasion-item">
+                    <div class="occasion-icon">🍽️</div>
+                    <div>Breakfast/Snack</div>
+                </div>
+                <div class="occasion-item">
+                    <div class="occasion-icon">🌱</div>
+                    <div>Vegetarian</div>
+                </div>
+                <div class="occasion-item">
+                    <div class="occasion-icon">⏱️</div>
+                    <div>Takes Time (Soaking)</div>
+                </div>
+                <div class="occasion-item">
+                    <div class="occasion-icon">🌾</div>
+                    <div>Gluten-Free</div>
+                </div>
             </div>
 
             <div class="nutrition">
                 <h3>Nutritional Information (Per Serving)</h3>
                 <ul>
-                    <li><strong>Calories:</strong> 300 kcal</li>
-                    <li><strong>Protein:</strong> 4g</li>
-                    <li><strong>Carbs:</strong> 35g</li>
-                    <li><strong>Fat:</strong> 16g</li>
-                    <li><strong>Sugar:</strong> 20g</li>
-                    <li><strong>Calcium:</strong> 80mg</li>
+                    <li><strong>Calories:</strong> 150 kcal</li>
+                    <li><strong>Protein:</strong> 5g</li>
+                    <li><strong>Carbs:</strong> 15g</li>
+                    <li><strong>Fat:</strong> 8g</li>
+                    <li><strong>Fiber:</strong> 2g</li>
+                    <li><strong>Iron:</strong> 6% DV</li>
+                    <li><strong>Calcium:</strong> 4% DV</li>
                 </ul>
             </div>
 
-           <!-- Why You'll Love This Dish -->
-<div class="why-love">
-    <h3>Why You'll Love This Dish</h3>
-    <ul>
-        <li>🍨 <strong>Crispy & Creamy:</strong> A delightful contrast of warm crispy crust and cool creamy ice cream.</li>
-        <li>✨ <strong>Unique:</strong> A dessert that never fails to wow your guests with its unexpected texture.</li>
-        <li>🍴 <strong>Customizable:</strong> Choose your favorite ice cream flavor or toppings for a personal touch.</li>
-        <li>🎉 <strong>Fun to Make:</strong> A hands-on cooking adventure that's as enjoyable to create as it is to eat.</li>
-    </ul>
-</div>
+            <div class="why-love">
+                <h3>Why You'll Love Medu Vada</h3>
+                <ul>
+                    <li>😋 <strong>Crispy and Delicious:</strong> Irresistible texture and taste</li>
+                    <li>🌱 <strong>Wholesome:</strong> Made from protein-rich urad dal</li>
+                    <li><i class="fas fa-utensils"></i> <strong>Versatile:</strong> Great with sambar and chutney</li>
+                    <li>💰 <strong>Budget-Friendly:</strong> Uses simple pantry staples</li>
+                    <li>👍 <strong>Gluten-Free:</strong> Naturally free of gluten</li>
+                </ul>
+            </div>
 
+            <div class="variations">
+                <h4>Delicious Variations</h4>
+                <ul>
+                    <li><strong>Masala Vada:</strong> Add finely chopped onions, ginger, and spices to the batter</li>
+                    <li><strong>Dahi Vada:</strong> Soak vadas in yogurt and top with chutneys and spices</li>
+                    <li><strong>Rava Vada:</strong> Combine urad dal batter with semolina for a different texture</li>
+                </ul>
+            </div>
 
         </div>
 
@@ -347,7 +437,7 @@
 
                 <div class="serving-size">
                     <label for="servings">Servings:</label>
-                    <input type="number" id="servings" value="1" min="1" max="6">
+                    <input type="number" id="servings" value="1" min="1" max="10">
                 </div>
 
                 <div class="ingredients">
@@ -355,80 +445,73 @@
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient1">
-                            <label for="ingredient1">4 scoops vanilla ice cream (or your choice)</label>
+                            <label for="ingredient1">1 cup urad dal (split black lentils)</label>
                         </div>
-                        <span class="ingredient-cost">₹60</span>
+                        <span class="ingredient-cost">₹20</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient2">
-                            <label for="ingredient2">1 cup crushed cornflakes</label>
+                            <label for="ingredient2">1 inch ginger, grated</label>
                         </div>
-                        <span class="ingredient-cost">₹10</span>
+                        <span class="ingredient-cost">₹2</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient3">
-                            <label for="ingredient3">1/2 cup shredded coconut</label>
+                            <label for="ingredient3">2 green chilies, finely chopped</label>
                         </div>
-                        <span class="ingredient-cost">₹15</span>
+                        <span class="ingredient-cost">₹1</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient4">
-                            <label for="ingredient4">2 tablespoons all-purpose flour</label>
+                            <label for="ingredient4">Few curry leaves, chopped</label>
                         </div>
-                        <span class="ingredient-cost">₹3</span>
+                        <span class="ingredient-cost">₹1</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient5">
-                            <label for="ingredient5">1 egg, beaten</label>
+                            <label for="ingredient5">Salt to taste</label>
                         </div>
-                        <span class="ingredient-cost">₹7</span>
+                        <span class="ingredient-cost">₹1</span>
                     </div>
                     <div class="ingredient-item">
                         <div class="ingredient-details">
                             <input type="checkbox" id="ingredient6">
-                            <label for="ingredient6">Vegetable oil, for frying</label>
+                            <label for="ingredient6">Oil for deep frying</label>
                         </div>
                         <span class="ingredient-cost">₹10</span>
                     </div>
-                    <div class="ingredient-item">
-                        <div class="ingredient-details">
-                            <input type="checkbox" id="ingredient7">
-                            <label for="ingredient7">Optional: Honey or chocolate syrup, for topping</label>
-                        </div>
-                        <span class="ingredient-cost">₹5</span>
-                    </div>
-                    <div class="total-cost">Total: ₹110</div>
+                    <div class="total-cost">Total: ₹35</div>
                 </div>
 
                 <div class="instructions">
                     <h3>Instructions</h3>
                     <div class="instruction-step active" data-step="1">
-                        Scoop the ice cream into firm balls (about 1/2 cup each) and place them on a baking sheet lined with parchment paper. Freeze for at least 2 hours, or until very firm.
+                        <strong>Soak Urad Dal:</strong> Rinse urad dal thoroughly. Soak in enough water for at least 4-5 hours, or overnight, until it doubles in volume.
                     </div>
                     <div class="instruction-step" data-step="2">
-                        In a shallow dish, combine the crushed cornflakes and shredded coconut. In another shallow dish, place the flour. In a third shallow dish, beat the egg.
+                        <strong>Grind the Dal:</strong> Drain all the water from the soaked dal. Grind it in a blender or wet grinder with minimal water to a smooth, thick, and fluffy batter. The consistency should be such that you can shape the vadas.
                     </div>
                     <div class="instruction-step" data-step="3">
-                        Working quickly, roll each frozen ice cream ball in the flour, then dip it in the beaten egg, and finally coat it thoroughly with the cornflake-coconut mixture. Make sure the coating is even and covers the entire ball.
+                        <strong>Add Ingredients:</strong> Transfer the batter to a bowl. Add grated ginger, finely chopped green chilies, chopped curry leaves, and salt to taste. Mix well.
                     </div>
                     <div class="instruction-step" data-step="4">
-                        Return the coated ice cream balls to the lined baking sheet and freeze again for at least 1 hour to help them hold their shape during frying.
+                        <strong>Heat Oil:</strong> Heat oil in a deep frying pan or kadai over medium heat. The oil should be hot enough for the vadas to float immediately upon dropping.
                     </div>
                     <div class="instruction-step" data-step="5">
-                        Heat about 2-3 inches of vegetable oil in a deep pot or Dutch oven to 375°F (190°C). Use a thermometer to ensure the oil is at the correct temperature.
+                        <strong>Shape the Vadas:</strong> Wet your hands. Take a small portion of the batter (about 2 tablespoons). Shape it into a ball and then flatten it slightly. Make a hole in the center with your thumb.
                     </div>
                     <div class="instruction-step" data-step="6">
-                        Carefully drop one or two ice cream balls at a time into the hot oil. Fry for only 10-15 seconds per side, until the coating isgolden brown and crispy. Do not overcook, or the ice cream will melt.
+                        <strong>Fry the Vadas:</strong> Gently slide the shaped vada into the hot oil. Fry a few vadas at a time, ensuring not to overcrowd the pan.
                     </div>
                     <div class="instruction-step" data-step="7">
-                        Remove the fried ice cream balls with a slotted spoon and place them on a plate lined with paper towels to drain any excess oil.
+                        <strong>Fry Until Golden:</strong> Fry the vadas on medium heat, flipping occasionally, until they turn golden brown and crispy on all sides. This will take about 4-5 minutes per batch.
                     </div>
                     <div class="instruction-step" data-step="8">
-                        Serve immediately. Drizzle with honey or chocolate syrup, if desired. You can also garnish with whipped cream, cinnamon, or a sprinkle of nuts.
+                        <strong>Drain and Serve:</strong> Remove the fried vadas with a slotted spoon and place them on a paper towel to drain excess oil. Serve hot with sambar and coconut chutney.
                     </div>
 
                     <div class="step-navigation">
@@ -451,24 +534,21 @@
     </footer>
 
     <script>
-        // Toggle favorites
         const favoritesBtn = document.getElementById('favorites-btn');
         favoritesBtn.addEventListener('click', () => {
             favoritesBtn.classList.toggle('active');
             favoritesBtn.textContent = favoritesBtn.classList.contains('active') ? 'Added to Favorites' : 'Add to Favorites';
         });
 
-        // Handle serving size change
         const servingsInput = document.getElementById('servings');
         servingsInput.addEventListener('input', (e) => {
             const servings = parseInt(e.target.value);
-            const baseCostPerScoop = 60 / 4; // ₹15 per scoop
-            const otherIngredientsCost = 10 + 15 + 3 + 7 + 10 + 5; // ₹50
-            const totalCost = (servings * baseCostPerScoop) + otherIngredientsCost;
-            document.querySelector('.total-cost').textContent = `Total: ₹${Math.max(0, totalCost)}`; // Ensure cost is not negative
+            const baseCost = 35; // Total cost for 1 serving
+            const costPerServing = baseCost;
+            const totalCost = Math.round(servings * costPerServing);
+            document.querySelector('.total-cost').textContent = `Total: ₹${totalCost}`;
         });
 
-        // Step navigation functionality
         const steps = document.querySelectorAll('.instruction-step');
         const prevBtn = document.getElementById('prev-step');
         const nextBtn = document.getElementById('next-step');
