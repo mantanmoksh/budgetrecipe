@@ -121,69 +121,82 @@
         const recipeList = document.getElementById("recipeList");
 
         const recipes = [
-            { price: 30, name: "Idli", image: "https://i.pinimg.com/736x/25/11/ae/2511aea623ba7893f6401be65b835f7b.jpg", link: "https://example.com/idli", description: "Steamed rice cakes, a classic South Indian breakfast." },
-            { price: 50, name: "Dosa", image: "https://i.pinimg.com/736x/a6/e8/7a/a6e87aaa35f64beb6abbfeb1fbbfc4af.jpg", link: "https://example.com/dosa", description: "Thin, crispy, fermented rice crepe." },
-            { price: 60, name: "Upma", image: "https://i.pinimg.com/736x/95/4e/d9/954ed9c5e30a41879373f115fe3a4417.jpg", link: "https://example.com/upma", description: "A healthy semolina-based breakfast dish." },
-            {price:340,name:"Poha",image:"https://i.pinimg.com/736x/c4/91/2d/c4912db4557b80ff2aaf91c88d1f4588.jpg",link:"https://example.com/poha",description:"Flattened rice, spiced, quick breakfast."},
-            {price:25,name:"Thepla",image:"https://i.pinimg.com/736x/db/83/22/db8322c60a49ca794eacd7f6a522bc66.jpg",link:"https://example.com/thep",description:"Spiced flatbread made from whole wheat."},
-            {price:140,name:"Kesari",image:"https://sinfullyspicy.com/wp-content/uploads/2022/02/Pineapple-Halwa-Side.jpg",link:"https://example/kesari",description:"Sweet semolina dessert with ghee."},
-            {price:320,name:"Chole Bhature",image:"https://i.pinimg.com/736x/7f/55/b3/7f55b38f35f6760ed94f75f7596de747.jpg",link:"https://example.com",description:" Spiced chickpeas with deep-fried bread"},
-            {price:500,name:"Pancake",image:"https://i.pinimg.com/736x/24/b3/26/24b326576650d53b8246d6c608c355bf.jpg",link:"https://example.com/pan",description:"Fluffy, sweet, griddled breakfast treat."},
-            {price:780,name:"Guntha Ponganalu",image:"https://i.pinimg.com/736x/81/32/32/813232af09c0627f0ad98b82847a4cb2.jpg",link:"https://example.com/pong",description:"Crispy rice-lentil dumplings, soft inside."},
-            {price:680,name:"Oats",image:"https://i.pinimg.com/736x/63/50/9e/63509ed57ddbbdf50eba6b68d4030c5e.jpg",link:"https://example.com/oats",description:"Healthy whole grain, fiber-rich breakfast."},
-            {price:125,name:"Pesarattu",image:"https://i.pinimg.com/736x/99/3c/23/993c231f8f58df9241e8e766beded79d.jpg",link:"https://example/",description:"Crispy green gram dosa."},
-            {price:900,name:"Peri-Peri Pasta",image:"https://i.pinimg.com/736x/8c/4d/88/8c4d88254265b6cc535aea98e9af35f1.jpg",link:"https://example.com",description:"Spicy, tangy pasta with peri-peri sauce."},
-            {price:340,name:"Mysore Bonda",image:"https://i.pinimg.com/736x/a8/d7/98/a8d7988df1ff7736a4d3d6719afd8b08.jpg",link:"https://example.com",description:"Crispy, fluffy deep-fried lentil fritters."},
-            {price:135,name:"Lemon Rice",image:"https://i.pinimg.com/736x/d5/33/2a/d5332a56a0c608684c758aac714a0cd6.jpg",link:"https://example.com",description:"Zesty, tangy rice with spices."},
-            {price:150,name:"Curd Rice",image:"https://i.pinimg.com/736x/af/07/0e/af070eb7e6313a1826e1331904027bf0.jpg",link:"https://example.com",description:"Creamy yogurt rice with tempered spices."},
-            {price:250,name:"Appam with Stew",image:"https://i.pinimg.com/736x/98/6e/b3/986eb30c91145e9880418c032ba8676d.jpg",link:"https://example.com/app",description: "Fermented rice pancakes with coconut-based curry"},
-            {price:850,name:"Ragi Khangi",image:"https://i.pinimg.com/736x/57/5c/ac/575cac41d45cd9767c2d1a4a1935951c.jpg",link:"https://example.com/",description:"Nourishing ragi porridge with buttermilk."},
-            {price:330,name:"Onion Uthapam",image:"https://i.pinimg.com/736x/08/5f/14/085f14555cc84e0515b3b21a21ba346c.jpg",link:"https://example.com/uthapam",description:"Soft savory pancake with onions."},
-            {price:980,name:"Sabudhana Upma",image:"https://www.vegrecipesofindia.com/wp-content/uploads/2013/10/sabudana-khichdi28.jpg",link:"https://example.com/up",description:"Tapioca pearls, spiced, savory delight."},
-            { price: 80, name: "Pongal", image: "https://i.pinimg.com/736x/1b/80/3a/1b803ab835e1a08aa0efa30532b7d9d3.jpg", link: "https://example.com/pongal", description: "Comforting rice and lentil dish, seasoned with spices." },
-            { price: 100, name: "Medu Vada", image: "https://i.pinimg.com/736x/de/a8/b5/dea8b58fe9d59cd0a13a1191f7a41bc0.jpg", link: "https://example.com/medu_vada", description: "Crispy lentil doughnuts, perfect with chutney and sambar." },
-            { price: 150, name: "Masala Dosa", image: "https://i.pinimg.com/736x/e8/49/4a/e8494a7a8a71af0c6b0a3f853e629ded.jpg", link: "https://example.com/masala_dosa", description: "Crispy dosa stuffed with spiced potato filling." },
-            { price: 70, name: "Uggani Bhaji", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpggPt8x0IMQ6k32J8SkYRcdukm8lCjVLnw&s", link: "https://example.com/appam", description: "Seema Special...Spicy and flavorful South Indian delicacy." },
-            { price: 120, name: "Semiya Upma", image: "https://i.pinimg.com/736x/c7/b9/64/c7b964fefb1b859a0894b82448b40398.jpg", link: "https://example.com/kesari", description: "Light and savory vermicelli breakfast dish." },
+            { price: 26, name: "Idli", image: "https://i.pinimg.com/736x/25/11/ae/2511aea623ba7893f6401be65b835f7b.jpg", link: "idly.html", description: "Steamed rice cakes, a classic South Indian breakfast." },
+            { price: 13, name: "Dosa", image: "https://i.pinimg.com/736x/a6/e8/7a/a6e87aaa35f64beb6abbfeb1fbbfc4af.jpg", link: "dosa.html", description: "Thin, crispy, fermented rice crepe." },
+            { price: 16, name: "Upma", image: "https://i.pinimg.com/736x/95/4e/d9/954ed9c5e30a41879373f115fe3a4417.jpg", link: "upma.html", description: "A healthy semolina-based breakfast dish." },
+            {price:15,name:"Poha",image:"https://i.pinimg.com/736x/c4/91/2d/c4912db4557b80ff2aaf91c88d1f4588.jpg",link:"poha.html",description:"Flattened rice, spiced, quick breakfast."},
+            {price:7,name:"Thepla",image:"https://i.pinimg.com/736x/db/83/22/db8322c60a49ca794eacd7f6a522bc66.jpg",link:"thepla.html",description:"Spiced flatbread made from whole wheat."},
+            {price:17,name:"Kesari",image:"https://sinfullyspicy.com/wp-content/uploads/2022/02/Pineapple-Halwa-Side.jpg",link:"kesari.html",description:"Sweet semolina dessert with ghee."},
+            {price:106,name:"Chole Bhature",image:"https://i.pinimg.com/736x/7f/55/b3/7f55b38f35f6760ed94f75f7596de747.jpg",link:"cholebhature.html",description:" Spiced chickpeas with deep-fried bread"},
+            {price:9,name:"Pancake",image:"https://i.pinimg.com/736x/24/b3/26/24b326576650d53b8246d6c608c355bf.jpg",link:"pancake.html",description:"Fluffy, sweet, griddled breakfast treat."},
+            {price:8,name:"Guntha Ponganalu",image:"https://i.pinimg.com/736x/81/32/32/813232af09c0627f0ad98b82847a4cb2.jpg",link:"gunthaponganalu.html",description:"Crispy rice-lentil dumplings, soft inside."},
+            {price:4,name:"Oats",image:"https://i.pinimg.com/736x/63/50/9e/63509ed57ddbbdf50eba6b68d4030c5e.jpg",link:"oats.html",description:"Healthy whole grain, fiber-rich breakfast."},
+            {price:7,name:"Pesarattu",image:"https://i.pinimg.com/736x/99/3c/23/993c231f8f58df9241e8e766beded79d.jpg",link:"pesarattu.html",description:"Crispy green gram dosa."},
+            {price:41,name:"Peri-Peri Pasta",image:"https://i.pinimg.com/736x/8c/4d/88/8c4d88254265b6cc535aea98e9af35f1.jpg",link:"periperipasta.html",description:"Spicy, tangy pasta with peri-peri sauce."},
+            {price:11,name:"Mysore Bonda",image:"https://i.pinimg.com/736x/a8/d7/98/a8d7988df1ff7736a4d3d6719afd8b08.jpg",link:"mysorebonda.html",description:"Crispy, fluffy deep-fried lentil fritters."},
+            {price:12,name:"Lemon Rice",image:"https://i.pinimg.com/736x/d5/33/2a/d5332a56a0c608684c758aac714a0cd6.jpg",link:"lemonrice.html",description:"Zesty, tangy rice with spices."},
+            {price:15,name:"Curd Rice",image:"https://i.pinimg.com/736x/af/07/0e/af070eb7e6313a1826e1331904027bf0.jpg",link:"curdrice.html",description:"Creamy yogurt rice with tempered spices."},
+            {price:103,name:"Appam with Stew",image:"https://i.pinimg.com/736x/98/6e/b3/986eb30c91145e9880418c032ba8676d.jpg",link:"appamwithstew.html",description: "Fermented rice pancakes with coconut-based curry"},
+            {price:6,name:"Ragi Khangi",image:"https://i.pinimg.com/736x/57/5c/ac/575cac41d45cd9767c2d1a4a1935951c.jpg",link:"ragikhangi.html",description:"Nourishing ragi porridge with buttermilk."},
+            {price:7,name:"Onion Uthapam",image:"https://i.pinimg.com/736x/08/5f/14/085f14555cc84e0515b3b21a21ba346c.jpg",link:"onionuthapam.html",description:"Soft savory pancake with onions."},
+            {price:48,name:"Sabudhana Upma",image:"https://www.vegrecipesofindia.com/wp-content/uploads/2013/10/sabudana-khichdi28.jpg",link:"sabhudhanaupma.html",description:"Tapioca pearls, spiced, savory delight."},
+            { price: 29, name: "Pongal", image: "https://i.pinimg.com/736x/1b/80/3a/1b803ab835e1a08aa0efa30532b7d9d3.jpg", link: "pongal.html", description: "Comforting rice and lentil dish, seasoned with spices." },
+            { price: 35, name: "Medu Vada", image: "https://i.pinimg.com/736x/de/a8/b5/dea8b58fe9d59cd0a13a1191f7a41bc0.jpg", link: "meduvada.html", description: "Crispy lentil doughnuts, perfect with chutney and sambar." },
+            { price: 32, name: "Masala Dosa", image: "https://i.pinimg.com/736x/e8/49/4a/e8494a7a8a71af0c6b0a3f853e629ded.jpg", link: "masaladosa.html", description: "Crispy dosa stuffed with spiced potato filling." },
+            { price: 19, name: "Uggani Bhaji", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnpggPt8x0IMQ6k32J8SkYRcdukm8lCjVLnw&s", link: "ugganibhagi.html", description: "Seema Special...Spicy and flavorful South Indian delicacy." },
+            { price: 4, name: "Semiya Upma", image: "https://i.pinimg.com/736x/c7/b9/64/c7b964fefb1b859a0894b82448b40398.jpg", link: "semiyaupma.html", description: "Light and savory vermicelli breakfast dish." },
         ];
 
-        function updateRecipes(price) {
-            recipeList.innerHTML = "";
-            const filteredRecipes = recipes.filter(recipe => recipe.price <= price);
-            filteredRecipes.forEach(recipe => {
-                const recipeItem = document.createElement("div");
-                recipeItem.classList.add("recipe-item");
+        function renderBreakfasts(breakfastArray) {
+    recipeList.innerHTML = "";
+    breakfastArray.forEach(breakfast => {
+        const item = document.createElement("div");
+        item.classList.add("recipe-item");
+        item.innerHTML = `
+            <a href="${breakfast.link || "#"}" target="_blank">
+                <img src="${breakfast.image}" alt="${breakfast.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+            </a>
+            <h3>${breakfast.name}</h3>
+            <p>${breakfast.description || ""}</p>
+            <p>₹${breakfast.price} ${breakfast.favourites ? `| ❤️ ${breakfast.favourites}` : ""}</p>
+        `;
+        recipeList.appendChild(item);
+    });
+}
 
-                const recipeLink = document.createElement("a");
-                recipeLink.href = recipe.link;
-                recipeLink.target = "_blank";
-
-                const recipeImage = document.createElement("img");
-                recipeImage.src = recipe.image;
-                recipeImage.alt = recipe.name;
-
-                const recipeText = document.createElement("div");
-                recipeText.textContent = recipe.name;
-
-                const recipeDescription = document.createElement("p");
-                recipeDescription.textContent = recipe.description;
-
-                recipeLink.appendChild(recipeImage);
-                recipeItem.appendChild(recipeLink);
-                recipeItem.appendChild(recipeText);
-                recipeItem.appendChild(recipeDescription);
-
-                recipeList.appendChild(recipeItem);
-            });
-        }
-
-        priceSlider.addEventListener("input", function() {
-            const selectedPrice = priceSlider.value;
-            priceDisplay.textContent = selectedPrice;
-            updateRecipes(selectedPrice);
+function updateFromBackend(budget) {
+    fetch(`http://localhost:5000/breakfast-recipes?budget=${budget}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length > 0) {
+                renderBreakfasts(data);
+            } else {
+                renderBreakfasts([]);
+                recipeList.innerHTML = "<p>No breakfast recipes found in this budget range.</p>";
+            }
+        })
+        .catch(err => {
+            console.warn("Backend not reachable. Falling back to local data.", err);
+            updateFromLocal(budget);
         });
+}
 
-        updateRecipes(priceSlider.value);
-    </script>
+function updateFromLocal(budget) {
+    const filtered = recipes.filter(recipe => recipe.price <= budget);
+    renderBreakfasts(filtered);
+}
+
+priceSlider.addEventListener("input", () => {
+    const budget = parseInt(priceSlider.value);
+    priceDisplay.textContent = budget;
+    updateFromBackend(budget);
+});
+
+// Initialize
+const initialBudget = parseInt(priceSlider.value);
+priceDisplay.textContent = initialBudget;
+updateFromBackend(initialBudget);
+
+</script>
 </body>
 </html>
