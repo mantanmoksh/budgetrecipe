@@ -143,55 +143,56 @@
         ];
 
     
-        function renderDesserts(dessertArray) {
-            recipeList.innerHTML = "";
-            dessertArray.forEach(dessert => {
-                const item = document.createElement("div");
-                item.classList.add("recipe-item");
-                item.innerHTML = `
-                    <a href="${dessert.link || "#"}" target="_blank">
-                        <img src="${dessert.image}" alt="${dessert.name}" style="width:200px;height:150px;border-radius:10px;"><br>
-                    </a>
-                    <h3>${dessert.name}</h3>
-                    <p>${dessert.description || ""}</p>
-                    <p>₹${dessert.price} ${dessert.favourites ? `| ❤️ ${dessert.favourites}` : ""}</p>
-                `;
-                recipeList.appendChild(item);
-            });
-        }
-    
-        function updateFromBackend(budget) {
-            fetch(`http://localhost:5000/recipes?budget=${budget}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        renderDesserts(data);
-                    } else {
-                        renderDesserts([]);
-                        recipeList.innerHTML = "<p>No recipes found in this budget range.</p>";
-                    }
-                })
-                .catch(err => {
-                    console.warn("Backend not reachable. Falling back to local data.", err);
-                    updateFromLocal(budget);
-                });
-        }
-    
-        function updateFromLocal(budget) {
-            const filtered = desserts.filter(d => d.price <= budget);
-            renderDesserts(filtered);
-        }
-    
-        slider.addEventListener("input", () => {
-            const budget = parseInt(slider.value);
-            priceDisplay.textContent = budget;
-            updateFromBackend(budget);
+        function renderNonVegRecipes(recipeArray) {
+        recipeList.innerHTML = "";
+        recipeArray.forEach(recipe => {
+            const item = document.createElement("div");
+            item.classList.add("recipe-item");
+            item.innerHTML = `
+                <a href="${recipe.link || "#"}" target="_blank">
+                    <img src="${recipe.image}" alt="${recipe.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+                </a>
+                <h3>${recipe.name}</h3>
+                <p>${recipe.description || ""}</p>
+                <p>₹${recipe.price} ${recipe.favourites ? `| ❤️ ${recipe.favourites}` : ""}</p>
+            `;
+            recipeList.appendChild(item);
         });
-    
-        // Initialize
-        const initialBudget = parseInt(slider.value);
-        priceDisplay.textContent = initialBudget;
-        updateFromBackend(initialBudget);
-    </script>
+    }
+
+    function updateFromBackend(budget) {
+        fetch(`http://localhost:5000/nonveg-recipes?budget=${budget}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    renderNonVegRecipes(data);
+                } else {
+                    renderNonVegRecipes([]);
+                    recipeList.innerHTML = "<p>No non-veg recipes found in this budget range.</p>";
+                }
+            })
+            .catch(err => {
+                console.warn("Backend not reachable. Falling back to local data.", err);
+                updateFromLocal(budget);
+            });
+    }
+
+    function updateFromLocal(budget) {
+    const filtered = recipes.filter(n => n.price <= budget);
+    renderNonVegRecipes(filtered);
+}
+
+
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
+        priceDisplay.textContent = budget;
+        updateFromBackend(budget);
+    });
+
+    // Initialize
+    const initialBudget = parseInt(slider.value);
+    priceDisplay.textContent = initialBudget;
+    updateFromBackend(initialBudget);
+</script>
 </body>
 </html>
