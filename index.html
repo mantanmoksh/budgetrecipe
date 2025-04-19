@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,6 +277,23 @@
             .recipes .card {
                 width: 90%;
             }
+.challenges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .challenges .card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
+        .challenges .card {
+            text-align: center;
+        }
         }
     </style>
 </head>
@@ -285,7 +303,8 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <img src="img (1)-photoaidcom-cropped (2) (8)-Photoroom.jpg" alt="logo" class="logo">
+           <img src="C:\Users\Tanmayee\OneDrive\Documents\logo.jpg" alt="logo" class="logo">
+
             <h1>Budget Friendly Recipe Finder</h1>
         </div>
     </        </div>
@@ -295,9 +314,9 @@
         <ul>
             <li><a href="veg.html">Veg Recipes</a></li>
             <li><a href="nonveg.html">Non-Veg Recipes</a></li>
-            <li><a href="popular.html">Popular</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">SignUp</a></li>
+                        <li><a href="login.html">Login</a></li>
+            <li><a href="SignUp">SignUp</a></li>
+             <li><a href="#" onclick="handleFavouritesClick()">Favourites</a></li>
         </ul>
     </nav>
     <!-- Search Bar -->
@@ -317,12 +336,7 @@
         <a href="dinner.html">
             <img src="https://i.pinimg.com/736x/fa/86/fb/fa86fb4baa3d581ed3611ffcf15e2e6f.jpg" alt="Dinner">
             <span>Dinner</span>
-        </a>
-        <a href="salads.html">
-            <img src="https://i.pinimg.com/736x/cb/5b/6c/cb5b6cd7b81f48f8dc946d5b2a9025c6.jpg" alt="Salads">
-            <span>Salads</span>
-        </a>
-        <a href="snacks.html">
+        </a>        <a href="snacks.html">
             <img src="https://i.pinimg.com/736x/a5/76/73/a57673b7e5df0dd5e0ad61879d8b8a32.jpg" alt="Snacks">
             <span>Snacks</span>
         </a>
@@ -428,8 +442,7 @@
     <div class="challenges">
         <!-- Challenge Card 1 -->
         <div class="card">
-            <img src="https://i.pinimg.com/736x/92/fb/c4/92fbc497e189aced07708b989c9b8ce0.jpg" alt="Healthy Eating Challenge">
-            <div class="card-content">
+                          <div class="card-content">
                 <h3>Healthy Eating Challenge</h3>
                 <p>Create a healthy meal plan for the week and share your creation!</p>
                 <a href="healthychallenge.html">Join Now</a>
@@ -437,8 +450,7 @@
         </div>
         <!-- Challenge Card 2 -->
         <div class="card">
-            <img src="https://i.pinimg.com/736x/b7/46/ee/b746ee2653c180da2c34f6cfb3df2570.jpg" alt="Dessert Challenge">
-            <div class="card-content">
+                      <div class="card-content">
                 <h3>Dessert Challenge</h3>
                 <p>Show off your baking skills                and create a delicious dessert.</p>
                 <a href="dessertchallenge.html">Join Now</a>
@@ -499,6 +511,14 @@
             e.preventDefault();
             alert('Thank you for voting!');
         });
+ function handleFavouritesClick() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn'); // example login flag
+        if (isLoggedIn === 'true') {
+            window.location.href = 'favourites.html'; // route to user's favourites
+        } else {
+            alert('Please login to view your favourites.');
+        }
+    }
     </script>
     <!-- Footer -->
     <footer>
@@ -510,4 +530,4 @@
         </div>
     </footer>
 </body>
-</html> 
+</html>
