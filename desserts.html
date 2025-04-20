@@ -146,44 +146,58 @@
             { price: 51, name: "Pistachio Cream Roll", image: "https://sinfullyspicy.com/wp-content/uploads/2023/08/2-6.jpg", link: "pistacreamroll.html", description: "Buttery, flaky pastry with a cream filling that tastes like mithai" }
         ];
 
-        function updateDesserts(price) {
-            recipeList.innerHTML = "";
-            const filteredDesserts = desserts.filter(dessert => dessert.price <= price);
-            filteredDesserts.forEach(dessert => {
-                const dessertItem = document.createElement("div");
-                dessertItem.classList.add("recipe-item");
+        function renderDesserts(dessertArray) {
+    recipeList.innerHTML = "";
+    dessertArray.forEach(dessert => {
+        const item = document.createElement("div");
+        item.classList.add("recipe-item");
+        item.innerHTML = `
+            <a href="${dessert.link || "#"}" target="_blank">
+                <img src="${dessert.image}" alt="${dessert.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+            </a>
+            <h3>${dessert.name}</h3>
+            <p>${dessert.description || ""}</p>
+            <p>₹${dessert.price} ${dessert.favourites ? `| ❤️ ${dessert.favourites}` : ""}</p>
+        `;
+        recipeList.appendChild(item);
+    });
+}
 
-                const dessertLink = document.createElement("a");
-                dessertLink.href = dessert.link;
-                dessertLink.target = "_blank";
-
-                const dessertImage = document.createElement("img");
-                dessertImage.src = dessert.image;
-                dessertImage.alt = dessert.name;
-
-                const dessertText = document.createElement("div");
-                dessertText.textContent = dessert.name;
-
-                const dessertDescription = document.createElement("p");
-                dessertDescription.textContent = dessert.description;
-
-                dessertLink.appendChild(dessertImage);
-                dessertItem.appendChild(dessertLink);
-                dessertItem.appendChild(dessertText);
-                dessertItem.appendChild(dessertDescription);
-
-                recipeList.appendChild(dessertItem);
-            });
-        }
-
-        priceSlider.addEventListener("input", function() {
-            const selectedPrice = priceSlider.value;
-            priceDisplay.textContent = selectedPrice;
-            updateDesserts(selectedPrice);
+function updateFromBackend(budget) {
+    fetch(`http://localhost:5000/recipes?budget=${budget}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.length > 0) {
+                renderDesserts(data);
+            } else {
+                renderDesserts([]);
+                recipeList.innerHTML = "<p>No recipes found in this budget range.</p>";
+            }
+        })
+        .catch(err => {
+            console.warn("Backend not reachable. Falling back to local data.", err);
+            updateFromLocal(budget);
         });
+}
 
-        updateDesserts(priceSlider.value);
+function updateFromLocal(budget) {
+    const filtered = desserts.filter(d => d.price <= budget);
+    renderDesserts(filtered);
+}
+
+priceSlider.addEventListener("input", () => {
+    const budget = parseInt(priceSlider.value); // Fixed reference here
+    priceDisplay.textContent = budget;
+    updateFromBackend(budget); // Fetch recipes based on the price range
+});
+
+// Initialize
+const initialBudget = parseInt(priceSlider.value);
+priceDisplay.textContent = initialBudget;
+updateFromBackend(initialBudget);
     </script>
+    
+
 </body>
 </html>
 
