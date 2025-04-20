@@ -1,81 +1,92 @@
-Metadata-Version: 2.3
-Name: Flask
-Version: 3.1.0
-Summary: A simple framework for building complex web applications.
+Metadata-Version: 2.1
+Name: MarkupSafe
+Version: 3.0.2
+Summary: Safely add untrusted strings to HTML/XML markup.
 Maintainer-email: Pallets <contact@palletsprojects.com>
-Requires-Python: >=3.9
-Description-Content-Type: text/markdown
+License: Copyright 2010 Pallets
+        
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are
+        met:
+        
+        1.  Redistributions of source code must retain the above copyright
+            notice, this list of conditions and the following disclaimer.
+        
+        2.  Redistributions in binary form must reproduce the above copyright
+            notice, this list of conditions and the following disclaimer in the
+            documentation and/or other materials provided with the distribution.
+        
+        3.  Neither the name of the copyright holder nor the names of its
+            contributors may be used to endorse or promote products derived from
+            this software without specific prior written permission.
+        
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+        "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+        LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+        PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+        TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+        PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+        LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+        NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        
+Project-URL: Donate, https://palletsprojects.com/donate
+Project-URL: Documentation, https://markupsafe.palletsprojects.com/
+Project-URL: Changes, https://markupsafe.palletsprojects.com/changes/
+Project-URL: Source, https://github.com/pallets/markupsafe/
+Project-URL: Chat, https://discord.gg/pallets
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Environment :: Web Environment
-Classifier: Framework :: Flask
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: BSD License
 Classifier: Operating System :: OS Independent
 Classifier: Programming Language :: Python
 Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content
-Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
-Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
-Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Text Processing :: Markup :: HTML
 Classifier: Typing :: Typed
-Requires-Dist: Werkzeug>=3.1
-Requires-Dist: Jinja2>=3.1.2
-Requires-Dist: itsdangerous>=2.2
-Requires-Dist: click>=8.1.3
-Requires-Dist: blinker>=1.9
-Requires-Dist: importlib-metadata>=3.6; python_version < '3.10'
-Requires-Dist: asgiref>=3.2 ; extra == "async"
-Requires-Dist: python-dotenv ; extra == "dotenv"
-Project-URL: Changes, https://flask.palletsprojects.com/changes/
-Project-URL: Chat, https://discord.gg/pallets
-Project-URL: Documentation, https://flask.palletsprojects.com/
-Project-URL: Donate, https://palletsprojects.com/donate
-Project-URL: Source, https://github.com/pallets/flask/
-Provides-Extra: async
-Provides-Extra: dotenv
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
 
-# Flask
+# MarkupSafe
 
-Flask is a lightweight [WSGI][] web application framework. It is designed
-to make getting started quick and easy, with the ability to scale up to
-complex applications. It began as a simple wrapper around [Werkzeug][]
-and [Jinja][], and has become one of the most popular Python web
-application frameworks.
-
-Flask offers suggestions, but doesn't enforce any dependencies or
-project layout. It is up to the developer to choose the tools and
-libraries they want to use. There are many extensions provided by the
-community that make adding new functionality easy.
-
-[WSGI]: https://wsgi.readthedocs.io/
-[Werkzeug]: https://werkzeug.palletsprojects.com/
-[Jinja]: https://jinja.palletsprojects.com/
+MarkupSafe implements a text object that escapes characters so it is
+safe to use in HTML and XML. Characters that have special meanings are
+replaced so that they display as the actual characters. This mitigates
+injection attacks, meaning untrusted user input can safely be displayed
+on a page.
 
 
-## A Simple Example
+## Examples
 
-```python
-# save this as app.py
-from flask import Flask
+```pycon
+>>> from markupsafe import Markup, escape
 
-app = Flask(__name__)
+>>> # escape replaces special characters and wraps in Markup
+>>> escape("<script>alert(document.cookie);</script>")
+Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')
 
-@app.route("/")
-def hello():
-    return "Hello, World!"
+>>> # wrap in Markup to mark text "safe" and prevent escaping
+>>> Markup("<strong>Hello</strong>")
+Markup('<strong>hello</strong>')
+
+>>> escape(Markup("<strong>Hello</strong>"))
+Markup('<strong>hello</strong>')
+
+>>> # Markup is a str subclass
+>>> # methods and operators escape their arguments
+>>> template = Markup("Hello <em>{name}</em>")
+>>> template.format(name='"World"')
+Markup('Hello <em>&#34;World&#34;</em>')
 ```
-
-```
-$ flask run
-  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-```
-
 
 ## Donate
 
-The Pallets organization develops and supports Flask and the libraries
-it uses. In order to grow the community of contributors and users, and
-allow the maintainers to devote more time to the projects, [please
-donate today][].
+The Pallets organization develops and supports MarkupSafe and other
+popular packages. In order to grow the community of contributors and
+users, and allow the maintainers to devote more time to the projects,
+[please donate today][].
 
 [please donate today]: https://palletsprojects.com/donate
-
