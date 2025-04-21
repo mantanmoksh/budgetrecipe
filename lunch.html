@@ -168,7 +168,7 @@ function renderLunches(lunchArray) {
     }
 
     function updateFromBackend(budget) {
-        fetch(`http://localhost:5000/lunch-recipes?budget=${budget}`)
+        fetch(`https://budgetrecipe-backend.onrender.com`)
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) {
