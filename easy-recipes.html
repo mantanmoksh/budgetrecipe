@@ -131,43 +131,57 @@
       { price: 54, name: "Paneer Wrap", image: "https://i.pinimg.com/736x/44/3e/3e/443e3eb28ee9315ab961787df489e30d.jpg", link: "pannerwrap.html", description: "Paneer tossed in spices and wrapped in roti." }
     ];
 
-    function updateRecipes(price) {
-      recipeList.innerHTML = "";
-      const filteredRecipes = recipes.filter(recipe => recipe.price <= price);
-      filteredRecipes.forEach(recipe => {
-        const recipeItem = document.createElement("div");
-        recipeItem.classList.add("recipe-item");
-
-        const recipeLink = document.createElement("a");
-        recipeLink.href = recipe.link;
-        recipeLink.target = "_blank";
-
-        const recipeImage = document.createElement("img");
-        recipeImage.src = recipe.image;
-        recipeImage.alt = recipe.name;
-
-        const recipeText = document.createElement("div");
-        recipeText.textContent = recipe.name;
-
-        const recipeDescription = document.createElement("p");
-        recipeDescription.textContent = recipe.description;
-
-        recipeLink.appendChild(recipeImage);
-        recipeItem.appendChild(recipeLink);
-        recipeItem.appendChild(recipeText);
-        recipeItem.appendChild(recipeDescription);
-
-        recipeList.appendChild(recipeItem);
-      });
+   <script>
+    function renderEasyRecipes(recipeArray) {
+        easyRecipeList.innerHTML = "";
+        recipeArray.forEach(recipe => {
+            const item = document.createElement("div");
+            item.classList.add("recipe-item");
+            item.innerHTML = `
+                <a href="${recipe.link || "#"}" target="_blank">
+                    <img src="${recipe.image}" alt="${recipe.name}">
+                </a>
+                <h3>${recipe.name}</h3>
+                <p>${recipe.description || ""}</p>
+                <p>₹${recipe.price} ${recipe.favourites ? " | ❤️ " + recipe.favourites : ""}</p>
+            `;
+            easyRecipeList.appendChild(item);
+        });
     }
 
-    priceSlider.addEventListener("input", function () {
-      const selectedPrice = priceSlider.value;
-      priceDisplay.textContent = selectedPrice;
-      updateRecipes(selectedPrice);
+    function updateEasyFromBackend(budget) {
+        fetch(`https://easyrecipe-backend.onrender.com/recipes?budget=${budget}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    renderEasyRecipes(data);
+                } else {
+                    renderEasyRecipes([]);
+                    easyRecipeList.innerHTML = "<p>No easy recipes found in this budget range.</p>";
+                }
+            })
+            .catch(err => {
+                console.warn("Backend not reachable. Falling back to local data.", err);
+                updateEasyFromLocal(budget);
+            });
+    }
+
+    function updateEasyFromLocal(budget) {
+        const filtered = easyRecipes.filter(r => r.price <= budget);
+        renderEasyRecipes(filtered);
+    }
+
+    priceSlider.addEventListener("input", () => {
+        const budget = parseInt(priceSlider.value);
+        priceDisplay.textContent = budget;
+        updateEasyFromBackend(budget);
     });
 
-    updateRecipes(priceSlider.value);
+    // Initial Load
+    const initialBudget = parseInt(priceSlider.value);
+    priceDisplay.textContent = initialBudget;
+    updateEasyFromBackend(initialBudget);
+
   </script>
 </body>
 </html>
