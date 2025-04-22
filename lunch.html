@@ -150,11 +150,20 @@
 
 
     
-function renderLunches(lunchArray) {
+function renderlunch(lunchArray) {
         recipeList.innerHTML = "";
-        lunchArray.forEach(lunch => {
+        dinnerArray.forEach(lunch => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
+
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
             item.innerHTML = `
                 <a href="${lunch.link || "#"}" target="_blank">
                     <img src="${lunch.image}" alt="${lunch.name}" style="width:200px;height:150px;border-radius:10px;"><br>
@@ -163,7 +172,10 @@ function renderLunches(lunchArray) {
                 <p>${lunch.description || ""}</p>
                 <p>₹${lunch.price} ${lunch.favourites ? `| ❤️ ${lunch.favourites}` : ""}</p>
             `;
-            recipeList.appendChild(item);
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
+            }
+           
         });
     }
 
@@ -172,10 +184,10 @@ function renderLunches(lunchArray) {
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) {
-                    renderLunches(data);
+                    renderlunch(data);
                 } else {
-                    renderLunches([]);
-                    recipeList.innerHTML = "<p>No lunch recipes found in this budget range.</p>";
+                    renderlunch([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
                 }
             })
             .catch(err => {
@@ -185,8 +197,8 @@ function renderLunches(lunchArray) {
     }
 
     function updateFromLocal(budget) {
-        const filtered = recipes.filter(l => l.price <= budget);
-        renderLunches(filtered);
+        const filtered = recipes.filter(d => d.price <= budget);
+        renderlunch(filtered);
     }
 
     slider.addEventListener("input", () => {
