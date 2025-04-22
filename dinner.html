@@ -148,9 +148,9 @@
         dinnerArray.forEach(dinner => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
-            var filteredRecepies = recipes.filter(item => {
+            var filteredRecepies = recipes.filter(ritem => {
 
-                if(item.name === dinner.name){
+                if(ritem.name === dinner.name){
                     return true;
                 }
                 return false;
