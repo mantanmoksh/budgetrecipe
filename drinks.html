@@ -143,20 +143,32 @@
             {price: 35, name: "Coffee Latte", image: "https://i.pinimg.com/736x/6a/86/c3/6a86c387495a30851e5843a582c7b6f2.jpg", link: "cofeelatte.html", description: "A refreshing coffee with milk." }
         ];
 
-        function renderDrinks(drinkArray) {
+        function renderdrinks(drinksArray) {
         recipeList.innerHTML = "";
-        drinkArray.forEach(drink => {
+        drinksArray.forEach(drinks => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
+
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
             item.innerHTML = `
-                <a href="${drink.link}" target="_blank">
-                    <img src="${drink.image}" alt="${drink.name}">
+                <a href="${drinks.link || "#"}" target="_blank">
+                    <img src="${drinks.image}" alt="${drinks.name}" style="width:200px;height:150px;border-radius:10px;"><br>
                 </a>
-                <h3>${drink.name}</h3>
-                <p>${drink.description}</p>
-                <p>₹${drink.price}</p>
+                <h3>${drinks.name}</h3>
+                <p>${drinks.description || ""}</p>
+                <p>₹${drinks.price} ${drinks.favourites ? `| ❤️ ${drinks.favourites}` : ""}</p>
             `;
-            recipeList.appendChild(item);
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
+            }
+           
         });
     }
 
@@ -165,9 +177,10 @@
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) {
-                    renderDrinks(data);
+                    renderdrinks(data);
                 } else {
-                    recipeList.innerHTML = "<p>No drink recipes found in this budget range.</p>";
+                    renderdrinks([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
                 }
             })
             .catch(err => {
@@ -177,22 +190,18 @@
     }
 
     function updateFromLocal(budget) {
-        const filtered = drinks.filter(d => d.price <= budget);
-        if (filtered.length > 0) {
-            renderDrinks(filtered);
-        } else {
-            recipeList.innerHTML = "<p>No drink recipes found in this budget range.</p>";
-        }
+        const filtered = recipes.filter(d => d.price <= budget);
+        renderdrinks(filtered);
     }
 
-    priceSlider.addEventListener("input", () => {
-        const budget = parseInt(priceSlider.value);
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
         priceDisplay.textContent = budget;
         updateFromBackend(budget);
     });
 
     // Initialize
-    const initialBudget = parseInt(priceSlider.value);
+    const initialBudget = parseInt(slider.value);
     priceDisplay.textContent = initialBudget;
     updateFromBackend(initialBudget);
 </script>
