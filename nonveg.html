@@ -145,7 +145,7 @@
     
         function rendernonveg(nonvegArray) {
         recipeList.innerHTML = "";
-        dinnerArray.forEach(nonveg => {
+        nonvegArray.forEach(nonveg => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
             var filteredRecepies = recipes.filter(ritem => {
