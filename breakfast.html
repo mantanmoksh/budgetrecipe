@@ -149,7 +149,7 @@
 
         function renderbreakfast(breakfastArray) {
         recipeList.innerHTML = "";
-        dinnerArray.forEach(breakfast => {
+        breakfastArray.forEach(breakfast => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
             var filteredRecepies = recipes.filter(ritem => {
