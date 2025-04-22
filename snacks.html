@@ -146,56 +146,67 @@ const snacks = [
 ];
 
 
-function renderSnacks(snackArray) {
-    recipeList.innerHTML = "";
-    snackArray.forEach(snack => {
-        const item = document.createElement("div");
-        item.classList.add("recipe-item");
-        item.innerHTML = `
-            <a href="${snack.link || "#"}" target="_blank">
-                <img src="${snack.image}" alt="${snack.name}" style="width:200px;height:150px;border-radius:10px;"><br>
-            </a>
-            <h3>${snack.name}</h3>
-            <p>${snack.description || ""}</p>
-            <p>₹${snack.price} ${snack.favourites ? `| ❤️ ${snack.favourites}` : ""}</p>
-        `;
-        recipeList.appendChild(item);
-    });
-}
+function rendersnacks(snacksArray) {
+        recipeList.innerHTML = "";
+        snacksArray.forEach(snacks => {
+            const item = document.createElement("div");
+            item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
 
-function updateFromBackend(budget) {
-    fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.length > 0) {
-                renderSnacks(data);
-            } else {
-                renderSnacks([]);
-                recipeList.innerHTML = "<p>No snack recipes found in this budget range.</p>";
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
+            item.innerHTML = `
+                <a href="${snacks.link || "#"}" target="_blank">
+                    <img src="${snacks.image}" alt="${snacks.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+                </a>
+                <h3>${snacks.name}</h3>
+                <p>${snacks.description || ""}</p>
+                <p>₹${snacks.price} ${snacks.favourites ? `| ❤️ ${snacks.favourites}` : ""}</p>
+            `;
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
             }
-        })
-        .catch(err => {
-            console.warn("Backend not reachable. Falling back to local data.", err);
-            updateFromLocal(budget);
+           
         });
-}
+    }
 
-function updateFromLocal(budget) {
-    const filtered = snacks.filter(s => s.price <= budget);
-    renderSnacks(filtered);
-}
+    function updateFromBackend(budget) {
+        fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    rendersnacks(data);
+                } else {
+                    rendersnacks([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
+                }
+            })
+            .catch(err => {
+                console.warn("Backend not reachable. Falling back to local data.", err);
+                updateFromLocal(budget);
+            });
+    }
 
-// 👇 FIXED here
-priceSlider.addEventListener("input", () => {
-    const budget = parseInt(priceSlider.value);
-    priceDisplay.textContent = budget;
-    updateFromBackend(budget);
-});
+    function updateFromLocal(budget) {
+        const filtered = recipes.filter(d => d.price <= budget);
+        rendersnacks(filtered);
+    }
 
-// 👇 FIXED here too
-const initialBudget = parseInt(priceSlider.value);
-priceDisplay.textContent = initialBudget;
-updateFromBackend(initialBudget);
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
+        priceDisplay.textContent = budget;
+        updateFromBackend(budget);
+    });
+
+    // Initialize
+    const initialBudget = parseInt(slider.value);
+    priceDisplay.textContent = initialBudget;
+    updateFromBackend(initialBudget);
 
 </script></body>
 </html>
