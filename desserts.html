@@ -146,55 +146,67 @@
             { price: 51, name: "Pistachio Cream Roll", image: "https://sinfullyspicy.com/wp-content/uploads/2023/08/2-6.jpg", link: "pistacreamroll.html", description: "Buttery, flaky pastry with a cream filling that tastes like mithai" }
         ];
 
-        function renderDesserts(dessertArray) {
-    recipeList.innerHTML = "";
-    dessertArray.forEach(dessert => {
-        const item = document.createElement("div");
-        item.classList.add("recipe-item");
-        item.innerHTML = `
-            <a href="${dessert.link || "#"}" target="_blank">
-                <img src="${dessert.image}" alt="${dessert.name}" style="width:200px;height:150px;border-radius:10px;"><br>
-            </a>
-            <h3>${dessert.name}</h3>
-            <p>${dessert.description || ""}</p>
-            <p>₹${dessert.price} ${dessert.favourites ? `| ❤️ ${dessert.favourites}` : ""}</p>
-        `;
-        recipeList.appendChild(item);
-    });
-}
+        function renderdesserts(dessertsArray) {
+        recipeList.innerHTML = "";
+        dessertsArray.forEach(desserts => {
+            const item = document.createElement("div");
+            item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
 
-function updateFromBackend(budget) {
-    fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.length > 0) {
-                renderDesserts(data);
-            } else {
-                renderDesserts([]);
-                recipeList.innerHTML = "<p>No recipes found in this budget range.</p>";
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
+            item.innerHTML = `
+                <a href="${desserts.link || "#"}" target="_blank">
+                    <img src="${desserts.image}" alt="${desserts.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+                </a>
+                <h3>${desserts.name}</h3>
+                <p>${desserts.description || ""}</p>
+                <p>₹${desserts.price} ${desserts.favourites ? `| ❤️ ${desserts.favourites}` : ""}</p>
+            `;
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
             }
-        })
-        .catch(err => {
-            console.warn("Backend not reachable. Falling back to local data.", err);
-            updateFromLocal(budget);
+           
         });
-}
+    }
 
-function updateFromLocal(budget) {
-    const filtered = desserts.filter(d => d.price <= budget);
-    renderDesserts(filtered);
-}
+    function updateFromBackend(budget) {
+        fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    renderdesserts(data);
+                } else {
+                    renderdesserts([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
+                }
+            })
+            .catch(err => {
+                console.warn("Backend not reachable. Falling back to local data.", err);
+                updateFromLocal(budget);
+            });
+    }
 
-priceSlider.addEventListener("input", () => {
-    const budget = parseInt(priceSlider.value); // Fixed reference here
-    priceDisplay.textContent = budget;
-    updateFromBackend(budget); // Fetch recipes based on the price range
-});
+    function updateFromLocal(budget) {
+        const filtered = recipes.filter(d => d.price <= budget);
+        renderdesserts(filtered);
+    }
 
-// Initialize
-const initialBudget = parseInt(priceSlider.value);
-priceDisplay.textContent = initialBudget;
-updateFromBackend(initialBudget);
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
+        priceDisplay.textContent = budget;
+        updateFromBackend(budget);
+    });
+
+    // Initialize
+    const initialBudget = parseInt(slider.value);
+    priceDisplay.textContent = initialBudget;
+    updateFromBackend(initialBudget);
     </script>
     
 
