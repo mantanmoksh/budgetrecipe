@@ -150,7 +150,7 @@
             item.classList.add("recipe-item");
             var filteredRecepies = recipes.filter(ritem => {
 
-                if(ritem.name === dinner.name){
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
                     return true;
                 }
                 return false;
