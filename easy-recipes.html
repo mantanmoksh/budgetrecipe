@@ -132,55 +132,67 @@
     ];
 
    <script>
-    function renderEasyRecipes(recipeArray) {
-        easyRecipeList.innerHTML = "";
-        recipeArray.forEach(recipe => {
+    function rendereasy(easyArray) {
+        recipeList.innerHTML = "";
+        easyArray.forEach(easy => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
+
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
             item.innerHTML = `
-                <a href="${recipe.link || "#"}" target="_blank">
-                    <img src="${recipe.image}" alt="${recipe.name}">
+                <a href="${easy.link || "#"}" target="_blank">
+                    <img src="${easy.image}" alt="${easy.name}" style="width:200px;height:150px;border-radius:10px;"><br>
                 </a>
-                <h3>${recipe.name}</h3>
-                <p>${recipe.description || ""}</p>
-                <p>₹${recipe.price} ${recipe.favourites ? " | ❤️ " + recipe.favourites : ""}</p>
+                <h3>${easy.name}</h3>
+                <p>${easy.description || ""}</p>
+                <p>₹${easy.price} ${easy.favourites ? `| ❤️ ${easy.favourites}` : ""}</p>
             `;
-            easyRecipeList.appendChild(item);
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
+            }
+           
         });
     }
 
-    function updateEasyFromBackend(budget) {
+    function updateFromBackend(budget) {
         fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) {
-                    renderEasyRecipes(data);
+                    rendereasy(data);
                 } else {
-                    renderEasyRecipes([]);
-                    easyRecipeList.innerHTML = "<p>No easy recipes found in this budget range.</p>";
+                    rendereasy([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
                 }
             })
             .catch(err => {
                 console.warn("Backend not reachable. Falling back to local data.", err);
-                updateEasyFromLocal(budget);
+                updateFromLocal(budget);
             });
     }
 
-    function updateEasyFromLocal(budget) {
-        const filtered = easyRecipes.filter(r => r.price <= budget);
-        renderEasyRecipes(filtered);
+    function updateFromLocal(budget) {
+        const filtered = recipes.filter(d => d.price <= budget);
+        rendereasy(filtered);
     }
 
-    priceSlider.addEventListener("input", () => {
-        const budget = parseInt(priceSlider.value);
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
         priceDisplay.textContent = budget;
-        updateEasyFromBackend(budget);
+        updateFromBackend(budget);
     });
 
-    // Initial Load
-    const initialBudget = parseInt(priceSlider.value);
+    // Initialize
+    const initialBudget = parseInt(slider.value);
     priceDisplay.textContent = initialBudget;
-    updateEasyFromBackend(initialBudget);
+    updateFromBackend(initialBudget);
 
   </script>
 </body>
