@@ -131,54 +131,67 @@
             { price: 107, name: "Dal Tadka", image: "https://i.pinimg.com/736x/30/6a/f7/306af751e7d3cf48e6e6e148fe813f4e.jpg", link: "daltadka.html", description: "Spiced lentil curry with aromatic tempering." }
         ];
 
-        function renderRecipes(recipeArray) {
-            recipeList.innerHTML = "";
-            recipeArray.forEach(recipe => {
-                const item = document.createElement("div");
-                item.classList.add("recipe-item");
-                item.innerHTML = `
-                    <a href="${recipe.link || "#"}" target="_blank">
-                        <img src="${recipe.image}" alt="${recipe.name}">
-                    </a>
-                    <h3>${recipe.name}</h3>
-                    <p>${recipe.description || ""}</p>
-                    <p>₹${recipe.price} ${recipe.favourites ? `| ❤️ ${recipe.favourites}` : ""}</p>
-                `;
-                recipeList.appendChild(item);
-            });
-        }
+        function renderhealthy(healthyArray) {
+        recipeList.innerHTML = "";
+        healthyArray.forEach(healthy => {
+            const item = document.createElement("div");
+            item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
 
-        function updateFromBackend(budget) {
-            fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        renderRecipes(data);
-                    } else {
-                        renderRecipes([]);
-                        recipeList.innerHTML = "<p>No healthy recipes found in this budget range.</p>";
-                    }
-                })
-                .catch(err => {
-                    console.warn("Backend not reachable. Falling back to local data.", err);
-                    updateFromLocal(budget);
-                });
-        }
-
-        function updateFromLocal(budget) {
-            const filtered = recipes.filter(r => r.price <= budget);
-            renderRecipes(filtered);
-        }
-
-        priceSlider.addEventListener("input", () => {
-            const budget = parseInt(priceSlider.value);
-            priceDisplay.textContent = budget;
-            updateFromBackend(budget);
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
+            item.innerHTML = `
+                <a href="${healthy.link || "#"}" target="_blank">
+                    <img src="${healthy.image}" alt="${healthy.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+                </a>
+                <h3>${healthy.name}</h3>
+                <p>${healthy.description || ""}</p>
+                <p>₹${healthy.price} ${healthy.favourites ? `| ❤️ ${healthy.favourites}` : ""}</p>
+            `;
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
+            }
+           
         });
+    }
 
-        const initialBudget = parseInt(priceSlider.value);
-        priceDisplay.textContent = initialBudget;
-        updateFromBackend(initialBudget);
+    function updateFromBackend(budget) {
+        fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    renderhealthy(data);
+                } else {
+                    renderhealthy([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
+                }
+            })
+            .catch(err => {
+                console.warn("Backend not reachable. Falling back to local data.", err);
+                updateFromLocal(budget);
+            });
+    }
+
+    function updateFromLocal(budget) {
+        const filtered = recipes.filter(d => d.price <= budget);
+        renderhealthy(filtered);
+    }
+
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
+        priceDisplay.textContent = budget;
+        updateFromBackend(budget);
+    });
+
+    // Initialize
+    const initialBudget = parseInt(slider.value);
+    priceDisplay.textContent = initialBudget;
+    updateFromBackend(initialBudget);
     </script>
 </body>
 </html>
