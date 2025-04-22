@@ -147,55 +147,67 @@
             { price: 4, name: "Semiya Upma", image: "https://i.pinimg.com/736x/c7/b9/64/c7b964fefb1b859a0894b82448b40398.jpg", link: "semiyaupma.html", description: "Light and savory vermicelli breakfast dish." },
         ];
 
-        function renderBreakfasts(breakfastArray) {
-    recipeList.innerHTML = "";
-    breakfastArray.forEach(breakfast => {
-        const item = document.createElement("div");
-        item.classList.add("recipe-item");
-        item.innerHTML = `
-            <a href="${breakfast.link || "#"}" target="_blank">
-                <img src="${breakfast.image}" alt="${breakfast.name}" style="width:200px;height:150px;border-radius:10px;"><br>
-            </a>
-            <h3>${breakfast.name}</h3>
-            <p>${breakfast.description || ""}</p>
-            <p>₹${breakfast.price} ${breakfast.favourites ? `| ❤️ ${breakfast.favourites}` : ""}</p>
-        `;
-        recipeList.appendChild(item);
-    });
-}
+        function renderbreakfast(breakfastArray) {
+        recipeList.innerHTML = "";
+        dinnerArray.forEach(breakfast => {
+            const item = document.createElement("div");
+            item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
 
-function updateFromBackend(budget) {
-    fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.length > 0) {
-                renderBreakfasts(data);
-            } else {
-                renderBreakfasts([]);
-                recipeList.innerHTML = "<p>No breakfast recipes found in this budget range.</p>";
+                if(ritem.name.toLowerCase() === dinner.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
+            item.innerHTML = `
+                <a href="${breakfast.link || "#"}" target="_blank">
+                    <img src="${breakfast.image}" alt="${breakfast.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+                </a>
+                <h3>${breakfast.name}</h3>
+                <p>${breakfast.description || ""}</p>
+                <p>₹${breakfast.price} ${breakfast.favourites ? `| ❤️ ${breakfast.favourites}` : ""}</p>
+            `;
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
             }
-        })
-        .catch(err => {
-            console.warn("Backend not reachable. Falling back to local data.", err);
-            updateFromLocal(budget);
+           
         });
-}
+    }
 
-function updateFromLocal(budget) {
-    const filtered = recipes.filter(recipe => recipe.price <= budget);
-    renderBreakfasts(filtered);
-}
+    function updateFromBackend(budget) {
+        fetch(`https://budgetrecipe-backend.onrender.com/recipes?budget=${budget}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length > 0) {
+                    renderbreakfast(data);
+                } else {
+                    renderbreakfast([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
+                }
+            })
+            .catch(err => {
+                console.warn("Backend not reachable. Falling back to local data.", err);
+                updateFromLocal(budget);
+            });
+    }
 
-priceSlider.addEventListener("input", () => {
-    const budget = parseInt(priceSlider.value);
-    priceDisplay.textContent = budget;
-    updateFromBackend(budget);
-});
+    function updateFromLocal(budget) {
+        const filtered = recipes.filter(d => d.price <= budget);
+        renderbreakfast(filtered);
+    }
 
-// Initialize
-const initialBudget = parseInt(priceSlider.value);
-priceDisplay.textContent = initialBudget;
-updateFromBackend(initialBudget);
+    slider.addEventListener("input", () => {
+        const budget = parseInt(slider.value);
+        priceDisplay.textContent = budget;
+        updateFromBackend(budget);
+    });
+
+    // Initialize
+    const initialBudget = parseInt(slider.value);
+    priceDisplay.textContent = initialBudget;
+    updateFromBackend(initialBudget);
 
 </script>
 </body>
