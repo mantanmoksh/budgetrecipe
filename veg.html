@@ -143,20 +143,32 @@
         ];
 
     
-        function renderVegRecipes(recipeArray) {
+        function renderveg(vegArray) {
         recipeList.innerHTML = "";
-        recipeArray.forEach(recipe => {
+        dinnerArray.forEach(veg => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
+            var filteredRecepies = recipes.filter(ritem => {
+
+                if(ritem.name.toLowerCase() === veg.name.toLowerCase()){
+                    return true;
+                }
+                return false;
+                
+            })
+            
             item.innerHTML = `
-                <a href="${recipe.link || "#"}" target="_blank">
-                    <img src="${recipe.image}" alt="${recipe.name}" style="width:200px;height:150px;border-radius:10px;"><br>
+                <a href="${veg.link || "#"}" target="_blank">
+                    <img src="${veg.image}" alt="${veg.name}" style="width:200px;height:150px;border-radius:10px;"><br>
                 </a>
-                <h3>${recipe.name}</h3>
-                <p>${recipe.description || ""}</p>
-                <p>₹${recipe.price} ${recipe.favourites ? `| ❤️ ${recipe.favourites}` : ""}</p>
+                <h3>${veg.name}</h3>
+                <p>${veg.description || ""}</p>
+                <p>₹${veg.price} ${veg.favourites ? `| ❤️ ${veg.favourites}` : ""}</p>
             `;
-            recipeList.appendChild(item);
+            if(filteredRecepies.length >0){
+                 recipeList.appendChild(item);
+            }
+           
         });
     }
 
@@ -165,10 +177,10 @@
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) {
-                    renderVegRecipes(data);
+                    renderveg(data);
                 } else {
-                    renderVegRecipes([]);
-                    recipeList.innerHTML = "<p>No vegetarian recipes found in this budget range.</p>";
+                    renderveg([]);
+                    recipeList.innerHTML = "<p>No dinner recipes found in this budget range.</p>";
                 }
             })
             .catch(err => {
@@ -178,10 +190,9 @@
     }
 
     function updateFromLocal(budget) {
-    const filtered = recipes.filter(v => v.price <= budget);
-    renderVegRecipes(filtered);
-}
-
+        const filtered = recipes.filter(d => d.price <= budget);
+        renderveg(filtered);
+    }
 
     slider.addEventListener("input", () => {
         const budget = parseInt(slider.value);
