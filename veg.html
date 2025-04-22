@@ -145,7 +145,7 @@
     
         function renderveg(vegArray) {
         recipeList.innerHTML = "";
-        dinnerArray.forEach(veg => {
+        vegArray.forEach(veg => {
             const item = document.createElement("div");
             item.classList.add("recipe-item");
             var filteredRecepies = recipes.filter(ritem => {
